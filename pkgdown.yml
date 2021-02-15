@@ -1,5 +1,7 @@
-pandoc: '2.2'
-pkgdown: 1.4.1.9000
-pkgdown_sha: 5e873fd9e478dddd784c31d8c8f994fd4b341c2a
-articles: []
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  rnrfa-vignette: rnrfa-vignette.html
+last_built: 2021-02-15T13:22Z
 
