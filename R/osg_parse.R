@@ -24,11 +24,18 @@
 #'
 #'   # multiple entries
 #'   osg_parse(grid_refs = c("SN831869","SN829838"))
+#'   
+#'   # multiple entries with missing values, NA will be returned
+#'   osg_parse(grid_refs = c("SN831869",NA, "SN829838", NA))
 #' }
 #'
 
 osg_parse <- function(grid_refs, coord_system = c("BNG", "WGS84")) {
 
+    # exclude nas (if present) and retain positions
+    grid_refs <- stats::na.exclude(grid_refs)
+    na_pos <- attr(grid_refs, "na.action")
+  
     grid_refs <- toupper(as.character(grid_refs))
     coord_system <- match.arg(coord_system)
 
@@ -76,6 +83,18 @@ osg_parse <- function(grid_refs, coord_system = c("BNG", "WGS84")) {
                          from = epsg_source, to = epsg_out)
 
     colnames(xy) <- names.out
+    
+    # put the NA values back into the correct places
+    if (!is.null(na_pos)) {
+      # length of original grid_refs
+      num_elements <- length(grid_refs) + length(na_pos)
+      
+      # put valid elements in the correct positions
+      xy[c(1:num_elements)[-na_pos],] <- xy
+      
+      # add the NAs back
+      xy[na_pos,] <- NA
+    }
 
     return(as.list(xy))
 }
