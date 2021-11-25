@@ -29,7 +29,7 @@ numbers. Each object can be accessed using their names or index
 \description{
 Given the station ID number(s), this function retrieves data
 (time series in zoo format with accompanying metadata) from the WaterML2
-service on the NRFA database. Gauged Daily Flow is measured in mm/day.
+service on the NRFA database. Gauged Daily Flow is measured in \eqn{m^3}/day.
 }
 \examples{
 \dontrun{

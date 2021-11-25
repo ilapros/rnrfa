@@ -48,6 +48,8 @@ generates a plots combining rainfall and flow information." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -59,9 +61,15 @@ generates a plots combining rainfall and flow information." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -75,7 +83,7 @@ generates a plots combining rainfall and flow information." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rnrfa</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.5-1</span>
       </span>
     </div>
 
@@ -135,7 +143,7 @@ mm/day to that it can be comparable with the rainfall (mm/month). Finally it
 generates a plots combining rainfall and flow information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_rain_flow</span><span class='op'>(</span>id <span class='op'>=</span> <span class='cn'>NULL</span>, rain <span class='op'>=</span> <span class='cn'>NULL</span>, flow <span class='op'>=</span> <span class='cn'>NULL</span>, area <span class='op'>=</span> <span class='cn'>NULL</span>, title <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>plot_rain_flow</span><span class='op'>(</span>id <span class='op'>=</span> <span class='cn'>NULL</span>, rain <span class='op'>=</span> <span class='cn'>NULL</span>, flow <span class='op'>=</span> <span class='cn'>NULL</span>, area <span class='op'>=</span> <span class='cn'>NULL</span>, title <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,10 +175,10 @@ generates a plots combining rainfall and flow information.</p>
     <p>Plot rainfall and flow for a given station</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>plot_rain_flow</span><span class='op'>(</span>id <span class='op'>=</span> <span class='fl'>54090</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'>plot_rain_flow</span><span class='op'>(</span>id <span class='op'>=</span> <span class='fl'>54090</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -182,11 +190,11 @@ generates a plots combining rainfall and flow information.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Ilaria Prosdocimi, Claudia Vitolo.</p>
+  <p><p>Developed by Ilaria Prosdocimi, Claudia Vitolo.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -194,6 +202,8 @@ generates a plots combining rainfall and flow information.</p>
 
   
 
+
+  
 
   </body>
 </html>
