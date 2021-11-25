@@ -37,6 +37,17 @@ test_that("Test grid references from various areas", {
 
 })
 
+test_that("Test grid references deal with missing values", {
+  
+  expect_that(osg_parse(c("SN831869", NA, "SN829838")),
+              equals(structure(list(easting = c(283100, NA, 282900),
+                                    northing = c(286900, NA, 283800)),
+                               .Names = c("easting", "northing"))))
+  
+  closeAllConnections()
+  
+})
+
 
 
 # crs 4326
