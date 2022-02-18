@@ -53,8 +53,7 @@
 #' }
 #'
 
-get_ts <- function(id, type, metadata = FALSE, cl = NULL, 
-                   full_info = FALSE) {
+get_ts <- function(id, type, metadata = FALSE, cl = NULL, full_info = FALSE) {
 
   options(warn = -1)                                     # do not print warnings
 

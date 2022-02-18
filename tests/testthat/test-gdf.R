@@ -3,11 +3,11 @@ context("Test gdf function")
 test_that("Output of gdf function for id 18019", {
 
   # All defaults
-  x1 <- gdf(id = 18019, metadata = FALSE, cl = NULL, verbose = FALSE)
+  x1 <- gdf(id = 18019, metadata = FALSE, cl = NULL)
   expect_true("zoo" %in% class(x1))
   expect_true(all(dim(x1) >= c(731, 1)))
 
-  x2 <- gdf(id = 18019, metadata = TRUE, cl = NULL, verbose = FALSE)
+  x2 <- gdf(id = 18019, metadata = TRUE, cl = NULL)
   expect_true("list" %in% class(x2))
   expect_equal(length(x2), 2)
 
