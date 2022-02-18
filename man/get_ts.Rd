@@ -4,14 +4,7 @@
 \alias{get_ts}
 \title{This function retrieves time series data.}
 \usage{
-get_ts(
-  id,
-  type,
-  metadata = FALSE,
-  cl = NULL,
-  verbose = FALSE,
-  full_info = FALSE
-)
+get_ts(id, type, metadata = FALSE, cl = NULL, full_info = FALSE)
 }
 \arguments{
 \item{id}{station identification number(s), each number should be in the
@@ -34,7 +27,7 @@ range [3002,236051].}
   \item amax-flow = Annual maxima flow
 }}
 
-\item{metadata}{Logical, FALSE by default. If metadata = TRUE means that the
+\item{metadata}{Logical, FALSE by default. When metadata = TRUE the
 result for a single station is a list with two elements: data (the time
 series) and meta (metadata).}
 
@@ -42,12 +35,8 @@ series) and meta (metadata).}
 package. This is set to NULL by default, which sends sequential calls to the
 server.}
 
-\item{verbose}{(FALSE by default). If set to TRUE prints GET request on the
-console.}
-
 \item{full_info}{Logical, FALSE by default. If full_info = TRUE, the function
-will retrieve info on rejected periods and return a data frame rather than a
-time series.}
+will retrieve information on rejected periods.}
 }
 \value{
 list composed of as many objects as in the list of station

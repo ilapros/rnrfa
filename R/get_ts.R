@@ -26,17 +26,14 @@
 #'   \item amax-stage = Annual maxima stage
 #'   \item amax-flow = Annual maxima flow
 #' }
-#' @param metadata Logical, FALSE by default. If metadata = TRUE means that the
+#' @param metadata Logical, FALSE by default. When metadata = TRUE the
 #' result for a single station is a list with two elements: data (the time
 #' series) and meta (metadata).
 #' @param cl (optional) This is a cluster object, created by the parallel
 #' package. This is set to NULL by default, which sends sequential calls to the
 #' server.
-#' @param verbose (FALSE by default). If set to TRUE prints GET request on the
-#' console.
 #' @param full_info Logical, FALSE by default. If full_info = TRUE, the function
-#' will retrieve info on rejected periods and return a data frame rather than a
-#' time series.
+#' will retrieve information on rejected periods.
 #'
 #' @return list composed of as many objects as in the list of station
 #' identification numbers. Each object can be accessed using their names or
@@ -56,7 +53,7 @@
 #' }
 #'
 
-get_ts <- function(id, type, metadata = FALSE, cl = NULL, verbose = FALSE,
+get_ts <- function(id, type, metadata = FALSE, cl = NULL, 
                    full_info = FALSE) {
 
   options(warn = -1)                                     # do not print warnings
@@ -74,14 +71,14 @@ get_ts <- function(id, type, metadata = FALSE, cl = NULL, verbose = FALSE,
 
       # In the case of a single identification number
       if (metadata == TRUE) {
-        ts_list <- get_ts_internal(id, type, metadata, verbose, full_info)
+        ts_list <- get_ts_internal(id, type, metadata, verbose = FALSE, full_info)
       }else{
         if (type %in% c("pot-stage", "pot-flow", "amax-stage", "amax-flow") &
             full_info) {
-          ts_list <- get_ts_internal(id, type, metadata, verbose,
+          ts_list <- get_ts_internal(id, type, metadata, verbose = FALSE,
                                             full_info)
         }else{
-          ts_list <- unlist(get_ts_internal(id, type, metadata, verbose,
+          ts_list <- unlist(get_ts_internal(id, type, metadata, verbose = FALSE,
                                             full_info))
         }
       }
@@ -97,7 +94,7 @@ get_ts <- function(id, type, metadata = FALSE, cl = NULL, verbose = FALSE,
           ts_list <- parallel::parLapply(cl = cl,
                                         X = as.list(id),
                                         fun = get_ts_internal,
-                                        type, metadata, verbose, full_info)
+                                        type, metadata, verbose = FALSE, full_info)
           names(ts_list) <- id
 
         }else{
@@ -108,7 +105,7 @@ get_ts <- function(id, type, metadata = FALSE, cl = NULL, verbose = FALSE,
 
         # multiple identification numbers - sequential data retrieval
         ts_list <- lapply(X = as.list(id), FUN = get_ts_internal,
-                         type, metadata, verbose, full_info)
+                         type, metadata, verbose = FALSE, full_info)
         names(ts_list) <- id
 
       }
