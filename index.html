@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rnrfa</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.5-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.5-2</span>
       </span>
     </div>
 
@@ -56,7 +58,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://journal.r-project.org/archive/2016/RJ-2016-036/index.html">Paper on The R Journal</a>
+      <a href="https://journal.r-project.org/archive/2016/RJ-2016-036/index.html" class="external-link">Paper on The R Journal</a>
     </li>
     <li>
       <a href="articles/rnrfa-vignette.html">Introduction</a>
@@ -69,7 +71,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ilapros/rnrfa/">
+  <a href="https://github.com/ilapros/rnrfa/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -86,54 +88,54 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="rnrfa" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#rnrfa" class="anchor"></a>rnrfa</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="rnrfa">rnrfa<a class="anchor" aria-label="anchor" href="#rnrfa"></a>
+</h1></div>
 <blockquote>
 <p>An R package to Retrieve, Filter and Visualize Data from the UK National River Flow Archive</p>
 </blockquote>
-<p><a href="https://doi.org/10.5281/zenodo.593201"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.593201.svg" alt="DOI"></a></p>
-<p><a href="https://cran.r-project.org/package=rnrfa"><img src="http://www.r-pkg.org/badges/version/rnrfa" alt="CRAN Status Badge"></a> <a href="https://cran.r-project.org/package=rnrfa"><img src="http://cranlogs.r-pkg.org/badges/grand-total/rnrfa" alt="CRAN Total Downloads"></a> <a href="https://cran.r-project.org/package=rnrfa"><img src="http://cranlogs.r-pkg.org/badges/rnrfa" alt="CRAN Monthly Downloads"></a></p>
-<p><a href="https://github.com/ilapros/rnrfa/actions"><img src="https://github.com/ilapros/rnrfa/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://codecov.io/github/ilapros/rnrfa?branch=master"><img src="https://codecov.io/gh/ilapros/rnrfa/master.svg" alt="Coverage Status"></a></p>
-<p><strong>This is the new page of rnrfa - past versions (and the first version) can be seen at <a href="https://github.com/cvitolo/rnrfa" class="uri">https://github.com/cvitolo/rnrfa</a></strong></p>
+<p><a href="https://doi.org/10.5281/zenodo.593201" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.593201.svg" alt="DOI"></a></p>
+<p><a href="https://cran.r-project.org/package=rnrfa" class="external-link"><img src="http://www.r-pkg.org/badges/version/rnrfa" alt="CRAN Status Badge"></a> <a href="https://cran.r-project.org/package=rnrfa" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/rnrfa" alt="CRAN Total Downloads"></a> <a href="https://cran.r-project.org/package=rnrfa" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/rnrfa" alt="CRAN Monthly Downloads"></a></p>
+<p><a href="https://github.com/ilapros/rnrfa/actions" class="external-link"><img src="https://github.com/ilapros/rnrfa/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://codecov.io/github/ilapros/rnrfa?branch=master" class="external-link"><img src="https://codecov.io/gh/ilapros/rnrfa/master.svg" alt="Coverage Status"></a></p>
+<p><strong>This is the new page of rnrfa - past versions (and the first version) can be seen at <a href="https://github.com/cvitolo/rnrfa" class="external-link uri">https://github.com/cvitolo/rnrfa</a></strong></p>
 <p>The UK National River Flow Archive serves daily streamflow data, spatial rainfall averages and information regarding elevation, geology, land cover and FEH related catchment descriptors.</p>
 <p>There is currently an API under development that in future should provide access to the following services: metadata catalogue, catalogue filters based on a geographical bounding-box, catalogue filters based on metadata entries, gauged daily data for about 400 stations available in WaterML2 format, the OGC standard used to describe hydrological time series.</p>
 <p>The information returned by the first three services is in JSON format, while the last one is an XML variant.</p>
 <p>The RNRFA package aims to achieve a simpler and more efficient access to data by providing wrapper functions to send HTTP requests and interpret XML/JSON responses.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>The stable version of the <strong>rnrfa</strong> package is available from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"rnrfa"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rnrfa"</span><span class="op">)</span></code></pre></div>
 <p>Or the development version from GitHub using the package <code>remotes</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"ilapros/rnrfa"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ilapros/rnrfa"</span><span class="op">)</span></code></pre></div>
 <p>Now, load the rnrfa package:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ilapros.github.io/rnrfa/">rnrfa</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://ilapros.github.io/rnrfa/" class="external-link">rnrfa</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
-<div id="retrieve-information-for-all-the-stations-in-the-catalogue" class="section level3">
-<h3 class="hasAnchor">
-<a href="#retrieve-information-for-all-the-stations-in-the-catalogue" class="anchor"></a>Retrieve information for all the stations in the catalogue</h3>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<div class="section level3">
+<h3 id="retrieve-information-for-all-the-stations-in-the-catalogue">Retrieve information for all the stations in the catalogue<a class="anchor" aria-label="anchor" href="#retrieve-information-for-all-the-stations-in-the-catalogue"></a>
+</h3>
 <p>The R function that deals with the NRFA catalogue to retrieve the full list of monitoring stations is called catalogue(). The function, used with no inputs, requests the full list of gauging stations with associated metadata. The output is a dataframe containing one record for each station and as many columns as the number of metadata entries available.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">allStations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/catalogue.html">catalogue</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>The same function catalogue() can be used to filter stations based on a bounding box or any of the metadata entries.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Define a bounding box:</span>
-<span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>lon_min<span class="op">=</span><span class="op">-</span><span class="fl">3.82</span>, lon_max<span class="op">=</span><span class="op">-</span><span class="fl">3.63</span>, lat_min<span class="op">=</span><span class="fl">52.43</span>, lat_max<span class="op">=</span><span class="fl">52.52</span><span class="op">)</span>
+<span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lon_min<span class="op">=</span><span class="op">-</span><span class="fl">3.82</span>, lon_max<span class="op">=</span><span class="op">-</span><span class="fl">3.63</span>, lat_min<span class="op">=</span><span class="fl">52.43</span>, lat_max<span class="op">=</span><span class="fl">52.52</span><span class="op">)</span>
 
 <span class="co"># Filter stations based on bounding box</span>
 <span class="va">someStations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/catalogue.html">catalogue</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="conversions-of-os-grid-references" class="section level3">
-<h3 class="hasAnchor">
-<a href="#conversions-of-os-grid-references" class="anchor"></a>Conversions of OS grid references</h3>
+<div class="section level3">
+<h3 id="conversions-of-os-grid-references">Conversions of OS grid references<a class="anchor" aria-label="anchor" href="#conversions-of-os-grid-references"></a>
+</h3>
 <p>The only geospatial information contained in the list of station in the catalogue is the OS grid reference (column “gridRef”). The RNRFA package allows convenient conversion to more standard coordinate systems. The function “osg_parse()”, for example, converts the string to easting and northing in the BNG coordinate system (EPSG code: 27700), as in the example below:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Where is the first catchment located?</span>
@@ -149,33 +151,33 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/osg_parse.html">osg_parse</a></span><span class="op">(</span><span class="va">someStations</span><span class="op">$</span><span class="va">`grid-reference`</span><span class="op">$</span><span class="va">ngr</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="time-series-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#time-series-data" class="anchor"></a>Time series data</h3>
+<div class="section level3">
+<h3 id="time-series-data">Time series data<a class="anchor" aria-label="anchor" href="#time-series-data"></a>
+</h3>
 <p>The first column of the table “someStations” contains the id number. This can be used to retrieve time series data and convert waterml2 files to time series object (of class zoo).</p>
 <p>The National River Flow Archive serves two types of time series data: gauged daily flow and catchment mean rainfall.</p>
 <p>Catchment mean rainfall:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cmr.html">cmr</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"3001"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">info</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">info</span><span class="op">)</span></code></pre></div>
 <p>Gauged daily flow:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gdf.html">gdf</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"3001"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">info</span><span class="op">)</span></code></pre></div>
-<p>For more examples and details, please see the <a href="https://github.com/ilapros/rnrfa/blob/master/vignettes/rnrfa-vignette.Rmd">vignette</a>.</p>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">info</span><span class="op">)</span></code></pre></div>
+<p>For more examples and details, please see the <a href="https://github.com/ilapros/rnrfa/blob/master/vignettes/rnrfa-vignette.Rmd" class="external-link">vignette</a>.</p>
 </div>
-<div id="terms-and-conditions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#terms-and-conditions" class="anchor"></a>Terms and Conditions</h3>
-<p>Please refer to the following Terms and Conditions for use of NRFA Data and disclaimer: <a href="https://nrfa.ceh.ac.uk/costs-terms-and-conditions" class="uri">https://nrfa.ceh.ac.uk/costs-terms-and-conditions</a></p>
+<div class="section level3">
+<h3 id="terms-and-conditions">Terms and Conditions<a class="anchor" aria-label="anchor" href="#terms-and-conditions"></a>
+</h3>
+<p>Please refer to the following Terms and Conditions for use of NRFA Data and disclaimer: <a href="https://nrfa.ceh.ac.uk/costs-terms-and-conditions" class="external-link uri">https://nrfa.ceh.ac.uk/costs-terms-and-conditions</a></p>
 <p>This package uses a non-public API which is likely to change. Package and functions herein are provided as is, without any guarantee.</p>
 </div>
-<div id="meta" class="section level3">
-<h3 class="hasAnchor">
-<a href="#meta" class="anchor"></a>Meta</h3>
+<div class="section level3">
+<h3 id="meta">Meta<a class="anchor" aria-label="anchor" href="#meta"></a>
+</h3>
 <ul>
-<li>Please <a href="https://github.com/ilapros/rnrfa/issues">report any issues or bugs</a>.</li>
-<li>License: <a href="https://opensource.org/licenses/GPL-3.0">GPL-3</a>
+<li>Please <a href="https://github.com/ilapros/rnrfa/issues" class="external-link">report any issues or bugs</a>.</li>
+<li>License: <a href="https://opensource.org/licenses/GPL-3.0" class="external-link">GPL-3</a>
 </li>
 <li>Get citation information for <code>rnrfa</code> in R doing <code>citation(package = 'rnrfa')</code>
 </li>
@@ -187,48 +189,52 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=rnrfa">https://​cloud.r-project.org/​package=rnrfa</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/ilapros/rnrfa/">https://​github.com/​ilapros/​rnrfa/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/ilapros/rnrfa/issues">https://​github.com/​ilapros/​rnrfa/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=rnrfa" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/ilapros/rnrfa/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ilapros/rnrfa/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
+
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing rnrfa</a></li>
+<li><a href="authors.html#citation">Citing rnrfa</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Ilaria Prosdocimi <br><small class="roles"> Contributor, maintainer </small> <a href="https://orcid.org/0000-0001-8565-094X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Claudia Vitolo <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4252-1176" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> <br><small>(Claudia is the original creator of the package)</small>
-</li>
-<li><a href="authors.html">All authors...</a></li>
+<li>Ilaria Prosdocimi <br><small class="roles"> Contributor, maintainer </small> <a href="https://orcid.org/0000-0001-8565-094X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Claudia Vitolo <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4252-1176" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Ilaria Prosdocimi, Claudia Vitolo.</p>
+  <p></p>
+<p>Developed by Ilaria Prosdocimi, Claudia Vitolo.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -236,6 +242,8 @@
 
   
 
+
+  
 
   </body>
 </html>
