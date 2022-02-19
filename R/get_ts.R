@@ -70,7 +70,8 @@ get_ts <- function(id, type, metadata = FALSE, cl = NULL, full_info = FALSE) {
 
       # In the case of a single identification number
       if (metadata == TRUE) {
-        ts_list <- get_ts_internal(id, type, metadata, verbose = FALSE, full_info)
+        ts_list <- get_ts_internal(id, type, metadata, 
+                                   verbose = FALSE, full_info)
       }else{
         if (type %in% c("pot-stage", "pot-flow", "amax-stage", "amax-flow") &
             full_info) {
@@ -93,7 +94,8 @@ get_ts <- function(id, type, metadata = FALSE, cl = NULL, full_info = FALSE) {
           ts_list <- parallel::parLapply(cl = cl,
                                         X = as.list(id),
                                         fun = get_ts_internal,
-                                        type, metadata, verbose = FALSE, full_info)
+                                        type, metadata, verbose = FALSE, 
+                                        full_info)
           names(ts_list) <- id
 
         }else{

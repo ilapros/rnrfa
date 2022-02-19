@@ -71,7 +71,7 @@ even <- function(x) x %% 2 == 0
 get_ts_internal <- function(id, type, metadata, verbose, full_info) {
 
   if (!curl::has_internet()) stop("no internet")
-  if(length(id) == 0) {
+  if (length(id) == 0) {
     message("id needs to be specified")
     return(NULL)
   }

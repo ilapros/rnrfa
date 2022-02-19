@@ -14,7 +14,7 @@
 #' @param cl (optional) This is a cluster object, created by the parallel
 #' package. This is set to NULL by default, which sends sequential calls to the
 #' server.
-#' 
+#'
 #' @return list composed of as many objects as in the list of station ID
 #' numbers. Each object can be accessed using their names or index
 #' (e.g. x[[1]], x[[2]], and so forth). Each object contains a zoo time series.
