@@ -6,21 +6,38 @@
 #' lat (latitude), lon (longitude), slope and an additional user-defined column
 #' \code{column_name}.
 #' @param column_name name of the column to use for grouping the results.
+#' @param maptype maptype. The default is "toner-lite", see ?ggmap::get_stamenmap for other options 
+#' @param showmap set to FALSE to avoid plotting the map when running the function
 #'
-#' @return Two plots, side-by-side, the first showing the distribution of the
+#' @return Two plots, the first showing the distribution of the
 #' trend over a map, based on the slope of the linear model that describes the
 #' trend. The second plot shows a boxplot of the slope grouped based on the
-#' column Region. Region and slope can be user-defined.
+#' column \code{column_name} and slope can be user-defined 
+#' (notice that in the plot the very extreme slope values are not displayed to avoid skewed visualisations). 
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#'   plot_trend(df, Region)
+#'   # some fake data around London 
+#'   df <- data.frame(lat = 51.5+runif(40,-0.3,0.3), 
+#'                    lon = 0+runif(40, -0.3,0.3),
+#'                    slope = rnorm(40, c(rep(-0.4,20),rep(0.4,20))), 
+#'                    g = factor(c(rep("a",20), rep("b",20))))
+#'   theplots <- plot_trend(df, "g", maptype = "terrain-background")
+#'   theplots$A # map
+#'   theplots$B + labs(subtitle = "Use ggplot usual commands to modify the plots") # boxplots
+#'   
 #' }
 
-plot_trend <- function(df, column_name) {
-
+plot_trend <- function(df, column_name, maptype = "toner-lite", showmap = TRUE) {
+  names(df) <- tolower(names(df))
+  if(!all(c("lat", "lon") %in% names(df))){
+    if(all(c("latitude", "longitude") %in% names(df))) {
+      df$lat <- df$latitude; df$lon <- df$longitude
+    }
+    else stop("need lat lon columns to proceed")
+  } 
   df$trend <- NA
   df$trend[df$slope >= 0]  <- "Positive"
   df$trend[df$slope < 0]  <- "Negative"
@@ -30,11 +47,30 @@ plot_trend <- function(df, column_name) {
 
   # Plot red dot for decreasing trend, blue dot for increasing trend
   tolerance <- (max(df$lon, na.rm = TRUE) - min(df$lon, na.rm = TRUE)) / 10
-  m <- ggmap::get_map(location = c(min(df$lon, na.rm = TRUE) - 2 * tolerance,
-                            min(df$lat, na.rm = TRUE) - 2 * tolerance,
-                            max(df$lon, na.rm = TRUE) + tolerance,
-                            max(df$lat, na.rm = TRUE)) + tolerance,
-               maptype = "toner-lite")
+  # m <- ggmap::get_map(location = c(min(df$lon, na.rm = TRUE) - 2 * tolerance,
+  #                           min(df$lat, na.rm = TRUE) - 2 * tolerance,
+  #                           max(df$lon, na.rm = TRUE) + tolerance,
+  #                           max(df$lat, na.rm = TRUE)) + tolerance,
+  #              maptype = "toner-lite")
+  ## ggmap only work with stamen, updating so one can choose maptype 
+  
+  ## from ggmap 
+    location <- c(left = min(df$lon, na.rm = TRUE) - 2 * tolerance,
+                    bottom = min(df$lat, na.rm = TRUE) - 2 * tolerance,
+                    right= max(df$lon, na.rm = TRUE) + tolerance,
+                    top = max(df$lat, na.rm = TRUE)) + tolerance
+    lon_range <- location[c("left","right")]
+    lat_range <- location[c("bottom","top")]
+
+      # compute zoom
+    lonlength <- diff(lon_range)
+    latlength <- diff(lat_range)
+    zoomlon <- ceiling( log2( 360*2 / lonlength) )
+    zoomlat <- ceiling( log2( 180*2 / latlength) )
+    zoom <- max(zoomlon, zoomlat)
+  
+  m <- ggmap::get_stamenmap(bbox = location,
+               maptype = maptype, zoom = zoom)
 
   # Plot map
   plot1 <- ggmap::ggmap(m, alpha = 0.5) +
@@ -46,7 +82,7 @@ plot_trend <- function(df, column_name) {
     ggplot2::theme(legend.position = "top") +
     ggplot2::ggtitle("A")
 
-  # Boxplot by NUTS1 region
+  # Boxplot by grouping variable (e.g. NUTS1 region)
   plot2 <- ggplot2::ggplot(df,
                            ggplot2::aes(x = eval(parse(text = column_name)),
                                         y = slope,
@@ -64,7 +100,7 @@ plot_trend <- function(df, column_name) {
                                                                           0,
                                                                           0))) +
     ggplot2::ggtitle("B")
-
+  if(showmap) print(plot1) 
   return(list("A" = plot1, "B" = plot2))
 
 }

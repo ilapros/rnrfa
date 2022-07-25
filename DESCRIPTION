@@ -23,7 +23,7 @@ Authors@R: c(person("Ilaria", "Prosdocimi",
                     introducing vectorisation")
                     )
 Maintainer: Ilaria Prosdocimi <prosdocimi.ilaria@gmail.com>
-URL: http://ilapros.github.io/rnrfa/
+URL: https://ilapros.github.io/rnrfa/
 BugReports: https://github.com/ilapros/rnrfa/issues
 Description: Utility functions to retrieve data from the UK National River Flow
   Archive (<https://nrfa.ceh.ac.uk/>, terms and conditions:
@@ -36,7 +36,6 @@ Description: Utility functions to retrieve data from the UK National River Flow
   <https://journal.r-project.org/archive/2016/RJ-2016-036/RJ-2016-036.pdf>.
 Depends: R (>= 3.5)
 Imports:
-    rgdal,
     curl,
     jsonlite,
     lubridate,
@@ -46,7 +45,7 @@ Imports:
     zoo,
     ggmap,
     ggplot2,
-    sp,
+    sf,
     parallel,
     tibble
 Suggests: 

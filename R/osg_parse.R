@@ -1,6 +1,6 @@
 #' Converts OS Grid Reference to BNG/WGS coordinates.
 #'
-#' @author Claudia Vitolo
+#' @author Claudia Vitolo (Ilaria Prosdocimi ported to sf)
 #'
 #' @description This function converts an Ordnance Survey (OS) grid reference to
 #' easting/northing or latitude/longitude coordinates.
@@ -99,9 +99,9 @@ osg_parse <- function(grid_refs, coord_system = c("BNG", "WGS84")) {
 
 .transform_crs <- function(x, y, from, to) {
 
-    df <- data.frame(x = as.numeric(x), y = as.numeric(y), from, to)
+    df <- data.frame(x = as.numeric(x), y = as.numeric(y), from = from, to = to)
 
-    .transform <- function(x) {
+        .transform <- function(x) {
         # transformation can only be vectorized for unique CRS
         if (length(unique(x$from)) > 1) {
           stop("Cannot handle multiple source CRS.")
@@ -111,22 +111,32 @@ osg_parse <- function(grid_refs, coord_system = c("BNG", "WGS84")) {
         }
 
         xy <- x[, c("x", "y")]
-
+       
         from <- x$from[1]
         to <- x$to[1]
+        rn <- rownames(x)
 
         # nothing to do ...
         if (from == to) return(xy)
-
-        sp::coordinates(xy) <- ~x + y
-        sp::proj4string(xy) <- sp::CRS(paste0("+init=epsg:", from))
-
-        xy_new <- sp::spTransform(xy, sp::CRS(paste0("+init=epsg:", to)))
-
-        as.data.frame(sp::coordinates(xy_new))
+        # 
+        # drop dependency on sp, include dependency on sf 
+        # this is due to the retiremnt of some packages
+        # https://r-spatial.org/r/2022/04/12/evolution.html#packages-depending-on-sp-and-raster
+        # sp::coordinates(xy) <- ~x + y
+        # sp::proj4string(xy) <- sp::CRS(paste0("+init=epsg:", from))
+        # 
+        # xy_new <- sp::spTransform(xy, sp::CRS(paste0("+init=epsg:", to)))
+        # 
+        # as.data.frame(sp::coordinates(xy_new))
+        if(nrow(xy) == 1) pointxy <- sf::st_sfc(sf::st_point(as.matrix(xy)), crs = from)
+        if(nrow(xy) > 1)  pointxy <- sf::st_sfc(sf::st_multipoint(as.matrix(xy)), crs = from)
+        xy_new <- sf::st_transform(pointxy,crs = sf::st_crs(to))
+        xy_new <- sf::st_coordinates(xy_new)[,c("X","Y"), drop = FALSE]
+        colnames(xy_new) <- c("x", "y"); rownames(xy_new) <- rn
+        as.data.frame(xy_new)
     }
 
-    # split to obain unique CRS
+    # split to obtain unique CRS
     grouped <- split(df, f = df[, c("from", "to")])
 
     unsplit(lapply(grouped, .transform), f = df[, c("from", "to")])

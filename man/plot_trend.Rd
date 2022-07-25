@@ -4,7 +4,7 @@
 \alias{plot_trend}
 \title{Plot trend}
 \usage{
-plot_trend(df, column_name)
+plot_trend(df, column_name, maptype = "toner-lite", showmap = TRUE)
 }
 \arguments{
 \item{df}{Data frame containing at least 4 column:
@@ -12,18 +12,31 @@ lat (latitude), lon (longitude), slope and an additional user-defined column
 \code{column_name}.}
 
 \item{column_name}{name of the column to use for grouping the results.}
+
+\item{maptype}{maptype. The default is "toner-lite", see ?ggmap::get_stamenmap for other options}
+
+\item{showmap}{set to FALSE to avoid plotting the map when running the function}
 }
 \value{
-Two plots, side-by-side, the first showing the distribution of the
+Two plots, the first showing the distribution of the
 trend over a map, based on the slope of the linear model that describes the
 trend. The second plot shows a boxplot of the slope grouped based on the
-column Region. Region and slope can be user-defined.
+column \code{column_name} and slope can be user-defined 
+(notice that in the plot the very extreme slope values are not displayed to avoid skewed visualisations).
 }
 \description{
 This function plots a previously calculated trend.
 }
 \examples{
 \dontrun{
-  plot_trend(df, Region)
+  # some fake data around London 
+  df <- data.frame(lat = 51.5+runif(40,-0.3,0.3), 
+                   lon = 0+runif(40, -0.3,0.3),
+                   slope = rnorm(40, c(rep(-0.4,20),rep(0.4,20))), 
+                   g = factor(c(rep("a",20), rep("b",20))))
+  theplots <- plot_trend(df, "g", maptype = "terrain-background")
+  theplots$A # map
+  theplots$B + labs(subtitle = "Use ggplot usual commands to modify the plots") # boxplots
+  
 }
 }

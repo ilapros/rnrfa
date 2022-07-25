@@ -30,12 +30,12 @@ easting/northing or latitude/longitude coordinates.
 
   # multiple entries
   osg_parse(grid_refs = c("SN831869","SN829838"))
-  
+
   # multiple entries with missing values, NA will be returned
   osg_parse(grid_refs = c("SN831869",NA, "SN829838", NA))
 }
 
 }
 \author{
-Claudia Vitolo
+Claudia Vitolo (Ilaria Prosdocimi ported to sf)
 }
