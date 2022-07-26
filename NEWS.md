@@ -6,9 +6,9 @@ Major changes:
 
 Minor changes:
 
-- To further ensure that the package fails gracefully when the NRFA api is interrogated about stations which do not exist an informative message is printed and the function(s) return a NULL object.  
-- Thanks to Andrew Duncan (@aj2duncan) osg_parse now outputs a missing value if a missing coordinate is given 
-- small fixes in documentation. 
+1. To further ensure that the package fails gracefully when the NRFA api is interrogated about stations which do not exist an informative message is printed and the function(s) return a NULL object.  
+2. Thanks to Andrew Duncan (@aj2duncan) osg_parse now outputs a missing value if a missing coordinate is given 
+3. small fixes in documentation. 
 
 v2.0.4 and submitted to CRAN.
 --------------------------------------
