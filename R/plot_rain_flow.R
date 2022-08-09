@@ -41,8 +41,8 @@ plot_rain_flow <- function(id = NULL,
 
   converted_flow <- convert_flow(flow, area)
 
-  proportion <- ceiling((max(converted_flow, na.rm = T) -
-                           min(converted_flow, na.rm = T)) / 3)
+  proportion <- ceiling((max(converted_flow, na.rm = TRUE) -
+                           min(converted_flow, na.rm = TRUE)) / 3)
 
   graphics::par(mar = c(4, 4, 4, 4))
 
@@ -51,10 +51,10 @@ plot_rain_flow <- function(id = NULL,
                 main = title, xlab = "", ylab = "Flow [mm/d]")
 
   # Add precipitation to the top
-  graphics::par(bty = "n", new = T)
+  graphics::par(bty = "n", new = TRUE)
   graphics::plot(rain, type = "h", main = "",
                  ylim = rev(range(rain) * 5), # downward bars
-                 yaxt = "n", xaxt = "n", ann = F, # do not plot x and y axis
+                 yaxt = "n", xaxt = "n", ann = FALSE, # do not plot x and y axis
                  auto.grid = FALSE, minor.ticks = FALSE,
                  col = "deepskyblue3") # suggested cosmetics
 
@@ -66,7 +66,7 @@ plot_rain_flow <- function(id = NULL,
                   cex = graphics::par("cex.lab"),
                   col = "deepskyblue3", adj = 1)
   # reset border and overlay
-  graphics::par(bty = "o", new = F)
+  graphics::par(bty = "o", new = FALSE)
 
   graphics::legend("bottom",
                    c("GDF", "CMR"),

@@ -4,6 +4,6 @@ library("lintr")
 
 if (!curl::has_internet()) {
   message("No internet, cannot run tests")
-}else{
+}else {
   test_check("rnrfa")
 }

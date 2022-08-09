@@ -95,8 +95,6 @@ osg_parse <- function(grid_refs, coord_system = c("BNG", "WGS84")) {
     return(as.list(xy))
 }
 
-
-
 .transform_crs <- function(x, y, from, to) {
 
     df <- data.frame(x = as.numeric(x), y = as.numeric(y), from = from, to = to)
@@ -118,19 +116,21 @@ osg_parse <- function(grid_refs, coord_system = c("BNG", "WGS84")) {
 
         # nothing to do ...
         if (from == to) return(xy)
-        # 
+        #
         # drop dependency on sp, include dependency on sf 
-        # this is due to the retiremnt of some packages
+        # this is due to the retirement of some packages
         # https://r-spatial.org/r/2022/04/12/evolution.html#packages-depending-on-sp-and-raster
         # sp::coordinates(xy) <- ~x + y
         # sp::proj4string(xy) <- sp::CRS(paste0("+init=epsg:", from))
-        # 
+        #
         # xy_new <- sp::spTransform(xy, sp::CRS(paste0("+init=epsg:", to)))
-        # 
+        #
         # as.data.frame(sp::coordinates(xy_new))
-        if(nrow(xy) == 1) pointxy <- sf::st_sfc(sf::st_point(as.matrix(xy)), crs = from)
-        if(nrow(xy) > 1)  pointxy <- sf::st_sfc(sf::st_multipoint(as.matrix(xy)), crs = from)
-        xy_new <- sf::st_transform(pointxy,crs = sf::st_crs(to))
+        if(nrow(xy) == 1) pointxy <- sf::st_sfc(sf::st_point(as.matrix(xy)), 
+                                                crs = from)
+        if(nrow(xy) > 1) pointxy <- sf::st_sfc(sf::st_multipoint(as.matrix(xy)), 
+                                                crs = from)
+        xy_new <- sf::st_transform(pointxy, crs = sf::st_crs(to))
         xy_new <- sf::st_coordinates(xy_new)[,c("X","Y"), drop = FALSE]
         colnames(xy_new) <- c("x", "y"); rownames(xy_new) <- rn
         as.data.frame(xy_new)

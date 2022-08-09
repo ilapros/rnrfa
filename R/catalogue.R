@@ -81,13 +81,13 @@ catalogue <- function(bbox = NULL, column_name = NULL, column_value = NULL,
   }
 
   # FILTER BASED ON METADATA STRINGS/THRESHOLD
-  if (is.null(column_name) & !is.null(column_value)) {
+  if (is.null(column_name) && !is.null(column_value)) {
     stop("Enter valid column_name")
   }
-  if (!is.null(column_name) & is.null(column_value)) {
+  if (!is.null(column_name) && is.null(column_value)) {
     stop("Enter valid column_value")
   }
-  if (!is.null(column_name) & !is.null(column_value)) {
+  if (!is.null(column_name) && !is.null(column_value)) {
     my_column <- unlist(eval(parse(text = paste0("df$`", column_name, "`"))))
     # The column contains numbers
     condition_1 <- is.numeric(my_column)
@@ -96,7 +96,7 @@ catalogue <- function(bbox = NULL, column_name = NULL, column_value = NULL,
       condition_2 <- substr(column_value, 1, 1) == ">"
       condition_3 <- substr(column_value, 1, 1) == "<"
       condition_4 <- substr(column_value, 1, 1) == "="
-      if (condition_2 | condition_3 | condition_4) {
+      if (condition_2 || condition_3 || condition_4) {
         if (substr(column_value, 2, 2) == "=") {
           threshold <- as.numeric(as.character(substr(column_value, 3,
                                                       nchar(column_value))))

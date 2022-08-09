@@ -25,7 +25,7 @@ seasonal_averages <- function(timeseries, season = "Spring") {
     message("Please, enter valid time series.")
     stop
 
-  }else{
+  }else {
 
     tslist <- lapply(X = as.list(timeseries), FUN = seasonal_averages_internal,
                      season)

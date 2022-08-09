@@ -42,9 +42,7 @@ test_that("Test grid references deal with missing values", {
               equals(structure(list(easting = c(283100, NA, 282900),
                                     northing = c(286900, NA, 283800)),
                                .Names = c("easting", "northing"))))
-  
   closeAllConnections()
-  
 })
 
 
