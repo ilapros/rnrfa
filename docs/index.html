@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rnrfa</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.0</span>
       </span>
     </div>
 
@@ -122,7 +122,7 @@
 <div class="section level3">
 <h3 id="retrieve-information-for-all-the-stations-in-the-catalogue">Retrieve information for all the stations in the catalogue<a class="anchor" aria-label="anchor" href="#retrieve-information-for-all-the-stations-in-the-catalogue"></a>
 </h3>
-<p>The R function that deals with the NRFA catalogue to retrieve the full list of monitoring stations is called catalogue(). The function, used with no inputs, requests the full list of gauging stations with associated metadata. The output is a dataframe containing one record for each station and as many columns as the number of metadata entries available.</p>
+<p>The R function that deals with the NRFA catalogue to retrieve the full list of monitoring stations is called catalogue(). The function, used with no inputs, requests the full list of gauging stations with associated metadata. The output is a tibble containing one record for each station and as many columns as the number of metadata entries available.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">allStations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/catalogue.html">catalogue</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The same function catalogue() can be used to filter stations based on a bounding box or any of the metadata entries.</p>

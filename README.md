@@ -45,7 +45,7 @@ library(rnrfa)
 
 ### Retrieve information for all the stations in the catalogue
 
-The R function that deals with the NRFA catalogue to retrieve the full list of monitoring stations is called catalogue(). The function, used with no inputs, requests the full list of gauging stations with associated metadata. The output is a dataframe containing one record for each station and as many columns as the number of metadata entries available.
+The R function that deals with the NRFA catalogue to retrieve the full list of monitoring stations is called catalogue(). The function, used with no inputs, requests the full list of gauging stations with associated metadata. The output is a tibble containing one record for each station and as many columns as the number of metadata entries available.
 
 ``` r
 allStations <- catalogue()
