@@ -19,7 +19,7 @@ website."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rnrfa</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.5-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.0</span>
       </span>
     </div>
 
@@ -28,7 +28,7 @@ website."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -70,13 +70,13 @@ website.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">catalogue</span><span class="op">(</span>
-  bbox <span class="op">=</span> <span class="cn">NULL</span>,
-  column_name <span class="op">=</span> <span class="cn">NULL</span>,
-  column_value <span class="op">=</span> <span class="cn">NULL</span>,
-  min_rec <span class="op">=</span> <span class="cn">NULL</span>,
-  all <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">catalogue</span><span class="op">(</span></span>
+<span>  bbox <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  column_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  column_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_rec <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  all <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -84,20 +84,31 @@ website.</p>
     <dl><dt>bbox</dt>
 <dd><p>this is a geographical bounding box (e.g. list(lon_min = -3.82,
 lon_max = -3.63, lat_min = 52.43, lat_max = 52.52))</p></dd>
+
+
 <dt>column_name</dt>
 <dd><p>name of column to filter</p></dd>
+
+
 <dt>column_value</dt>
 <dd><p>string to search in column_name</p></dd>
+
+
 <dt>min_rec</dt>
 <dd><p>minimum number of recording years</p></dd>
+
+
 <dt>all</dt>
 <dd><p>if TRUE it returns all the available metadata. If FALSE, it
 returns only the following columns: id, name, river, hydrometricArea,
 operator, haName, catchmentArea, altitude, lat, lon.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>tibble table containing the list of stations and related metadata</p>
+    
+
+<p>tibble table containing the list of stations and related metadata</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -112,22 +123,22 @@ the maximum extent of the network.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="co"># Retrieve all the stations in the network</span></span>
-<span class="r-in">  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">catalogue</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># Define a bounding box:</span></span>
-<span class="r-in">  <span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lon_min<span class="op">=</span><span class="op">-</span><span class="fl">3.82</span>, lon_max<span class="op">=</span><span class="op">-</span><span class="fl">3.63</span>, lat_min<span class="op">=</span><span class="fl">52.43</span>, lat_max<span class="op">=</span><span class="fl">52.52</span><span class="op">)</span></span>
-<span class="r-in">  <span class="co"># Get stations within the bounding box</span></span>
-<span class="r-in">  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">catalogue</span><span class="op">(</span><span class="va">bbox</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># Get stations based on minimum catchment area</span></span>
-<span class="r-in">  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">catalogue</span><span class="op">(</span>column_name <span class="op">=</span> <span class="st">"catchment-area"</span>, column_value <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># Get stations based on minimum number of recording years</span></span>
-<span class="r-in">  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">catalogue</span><span class="op">(</span>min_rec<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># Retrieve all the stations in the network</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">catalogue</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Define a bounding box:</span></span></span>
+<span class="r-in"><span>  <span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lon_min<span class="op">=</span><span class="op">-</span><span class="fl">3.82</span>, lon_max<span class="op">=</span><span class="op">-</span><span class="fl">3.63</span>, lat_min<span class="op">=</span><span class="fl">52.43</span>, lat_max<span class="op">=</span><span class="fl">52.52</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Get stations within the bounding box</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">catalogue</span><span class="op">(</span><span class="va">bbox</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Get stations based on minimum catchment area</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">catalogue</span><span class="op">(</span>column_name <span class="op">=</span> <span class="st">"catchment-area"</span>, column_value <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Get stations based on minimum number of recording years</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">catalogue</span><span class="op">(</span>min_rec<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -142,7 +153,7 @@ the maximum extent of the network.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

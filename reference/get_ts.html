@@ -21,7 +21,7 @@ types: cmr (catchment mean rainfall, monthly) or gdf
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rnrfa</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.5-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.0</span>
       </span>
     </div>
 
@@ -30,7 +30,7 @@ types: cmr (catchment mean rainfall, monthly) or gdf
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,7 +74,7 @@ types: <code>cmr</code> (catchment mean rainfall, monthly) or <code>gdf</code>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_ts</span><span class="op">(</span><span class="va">id</span>, <span class="va">type</span>, metadata <span class="op">=</span> <span class="cn">FALSE</span>, cl <span class="op">=</span> <span class="cn">NULL</span>, full_info <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_ts</span><span class="op">(</span><span class="va">id</span>, <span class="va">type</span>, metadata <span class="op">=</span> <span class="cn">FALSE</span>, cl <span class="op">=</span> <span class="cn">NULL</span>, full_info <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -82,6 +82,8 @@ types: <code>cmr</code> (catchment mean rainfall, monthly) or <code>gdf</code>
     <dl><dt>id</dt>
 <dd><p>station identification number(s), each number should be in the
 range [3002,236051].</p></dd>
+
+
 <dt>type</dt>
 <dd><p>The following data-types are available:</p><ul><li><p>gdf = Gauged daily flows</p></li>
 <li><p>gmf = Gauged monthly flows</p></li>
@@ -97,21 +99,30 @@ range [3002,236051].</p></dd>
 <li><p>amax-stage = Annual maxima stage</p></li>
 <li><p>amax-flow = Annual maxima flow</p></li>
 </ul></dd>
+
+
 <dt>metadata</dt>
 <dd><p>Logical, FALSE by default. When metadata = TRUE the
 result for a single station is a list with two elements: data (the time
 series) and meta (metadata).</p></dd>
+
+
 <dt>cl</dt>
 <dd><p>(optional) This is a cluster object, created by the parallel
 package. This is set to NULL by default, which sends sequential calls to the
 server.</p></dd>
+
+
 <dt>full_info</dt>
 <dd><p>Logical, FALSE by default. If full_info = TRUE, the function
 will retrieve information on rejected periods.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>list composed of as many objects as in the list of station
+    
+
+<p>list composed of as many objects as in the list of station
 identification numbers. Each object can be accessed using their names or
 indexes (e.g. x[[1]], x[[2]], and so forth). Each object contains a time
 series of class <code>zoo/xts</code>.</p>
@@ -123,15 +134,15 @@ series of class <code>zoo/xts</code>.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu">get_ts</span><span class="op">(</span><span class="fl">18019</span>, type <span class="op">=</span> <span class="st">"cmr"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">get_ts</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54022</span>,<span class="fl">54090</span>,<span class="fl">54091</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"cmr"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">get_ts</span><span class="op">(</span><span class="fl">18019</span>, type <span class="op">=</span> <span class="st">"gdf"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">get_ts</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54022</span>,<span class="fl">54090</span>,<span class="fl">54091</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"gdf"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">get_ts</span><span class="op">(</span>id <span class="op">=</span> <span class="fl">23001</span>, type <span class="op">=</span> <span class="st">"ndf"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">get_ts</span><span class="op">(</span>id <span class="op">=</span> <span class="fl">23001</span>, type <span class="op">=</span> <span class="st">"nmf"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">get_ts</span><span class="op">(</span><span class="fl">18019</span>, type <span class="op">=</span> <span class="st">"cmr"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">get_ts</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54022</span>,<span class="fl">54090</span>,<span class="fl">54091</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"cmr"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">get_ts</span><span class="op">(</span><span class="fl">18019</span>, type <span class="op">=</span> <span class="st">"gdf"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">get_ts</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54022</span>,<span class="fl">54090</span>,<span class="fl">54091</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"gdf"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">get_ts</span><span class="op">(</span>id <span class="op">=</span> <span class="fl">23001</span>, type <span class="op">=</span> <span class="st">"ndf"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">get_ts</span><span class="op">(</span>id <span class="op">=</span> <span class="fl">23001</span>, type <span class="op">=</span> <span class="st">"nmf"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -146,7 +157,7 @@ series of class <code>zoo/xts</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
