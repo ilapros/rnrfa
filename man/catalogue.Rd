@@ -24,7 +24,7 @@ lon_max = -3.63, lat_min = 52.43, lat_max = 52.52))}
 
 \item{all}{if TRUE it returns all the available metadata. If FALSE, it
 returns only the following columns: id, name, river, hydrometricArea,
-operator, haName, catchmentArea, altitude, lat, lon.}
+catchmentArea, lat, lon, selected feh catchment descriptors.}
 }
 \value{
 tibble table containing the list of stations and related metadata
