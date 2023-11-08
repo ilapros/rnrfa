@@ -13,10 +13,10 @@ lat (latitude), lon (longitude), slope and an additional user-defined column
 
 \item{column_name}{name of the column to use for grouping the results.}
 
-\item{showmap}{set to FALSE to avoid plotting the map when running the function}
-
-\item{maptype:}{maptype, was need to choose the stamenmap type, now useless since
+\item{maptype}{maptype, was need to choose the stamenmap type, now useless since
 stamenmap are no longer reachable}
+
+\item{showmap}{set to FALSE to avoid plotting the map when running the function}
 }
 \value{
 Two plots, the first showing the distribution of the

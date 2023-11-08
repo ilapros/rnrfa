@@ -6,7 +6,7 @@
 #' lat (latitude), lon (longitude), slope and an additional user-defined column
 #' \code{column_name}.
 #' @param column_name name of the column to use for grouping the results.
-#' @param maptype: maptype, was need to choose the stamenmap type, now useless since
+#' @param maptype maptype, was need to choose the stamenmap type, now useless since
 #' stamenmap are no longer reachable 
 #' @param showmap set to FALSE to avoid plotting the map when running the function
 #'

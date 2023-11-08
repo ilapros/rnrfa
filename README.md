@@ -6,7 +6,6 @@
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/rnrfa)](https://cran.r-project.org/package=rnrfa)
 [![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rnrfa)](https://cran.r-project.org/package=rnrfa)
 [![CRAN Monthly Downloads](http://cranlogs.r-pkg.org/badges/rnrfa)](https://cran.r-project.org/package=rnrfa)
-
 [![R-CMD-check](https://github.com/ilapros/rnrfa/workflows/R-CMD-check/badge.svg)](https://github.com/ilapros/rnrfa/actions)
 [![Coverage Status](https://codecov.io/gh/ilapros/rnrfa/master.svg)](https://codecov.io/github/ilapros/rnrfa?branch=master)
 

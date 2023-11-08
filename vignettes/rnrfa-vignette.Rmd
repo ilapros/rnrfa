@@ -36,9 +36,9 @@ install.packages(c("curl", "ggmap", "ggplot2", "httr", "jsonlite",
 
 This demo makes also use of external libraries. To install and load them run the following commands:
 
-```{r,eval=FALSE}
-packs <- c("devtools", "DT", "leaflet")
-install.packages(packs)
+```{r,eval=TRUE}
+packs <- c("devtools", "DT", "leaflet", "dygraphs")
+install.packages(packs, repos = "https://cloud.r-project.org")
 lapply(packs, require, character.only = TRUE)
 ```
 
@@ -299,7 +299,8 @@ dygraph(info$data) %>% dyRangeSelector()
 ```
 
 Sequential vs Concurrent requests: a simple benchmark test
-```{r}
+
+```{r,eval=FALSE}
 library(parallel)
 # Use detectCores() to find out many cores are available on your machine
 cl <- makeCluster(getOption("cl.cores", detectCores()))
@@ -319,12 +320,10 @@ stopCluster(cl)
 The measured flows are expected to increase with the catchment area. Let's show this simple regression on a plot:
 
 ```{r}
-# Calculate the mean flow for each catchment
-someStations$meangdf <- unlist(lapply(s2, mean))
-
 # Linear model
 library(ggplot2)
-ggplot(someStations, aes(x = as.numeric(`catchment-area`), y = meangdf)) +
+ggplot(allStations[!is.na(allStations$qmed),], 
+       aes(x = as.numeric(`catchment-area`), y = qmed)) +
   geom_point() +
   stat_smooth(formula = y ~ x,method = "lm", col = "red") +
   xlab(expression(paste("Catchment area [Km^2]",sep=""))) +
