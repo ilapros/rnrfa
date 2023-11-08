@@ -31,7 +31,7 @@ The rnrfa package depends on the **gdal** library, make sure you have it install
 ```{r,eval=FALSE}
 # these should normally already be installed with rnrfa
 install.packages(c("curl", "ggmap", "ggplot2", "httr", "jsonlite",
-                    "lubridate", "parallel", "sf","tibble", "zoo"))
+                   "lubridate", "parallel", "sf", "tibble", "zoo"))
 ```
 
 This demo makes also use of external libraries. To install and load them run the following commands:
@@ -231,9 +231,10 @@ One can also ask to retrieve some metadata with useful information:
 # Fetch time series data and metadata from the waterml2 service
 info <- cmr(id = "3001", metadata = TRUE)
 info$meta
-plot(info$data, main=paste("Monthly rainfall data for the",
-                           info$meta$station.name,"catchment"), 
-     xlab="", ylab=info$meta$data.type.units)
+plot(info$data, 
+     main = paste("Monthly rainfall data for the", 
+                info$meta$station.name,"catchment"), 
+     xlab = "", ylab=info$meta$data.type.units)
 ```
 
 Here is how to retrieve (daily) flow data for _Shin at Lairg (id = 3001)_ catchment.
@@ -245,10 +246,9 @@ Here is how to retrieve (daily) flow data for _Shin at Lairg (id = 3001)_ catchm
 
 # Fetch time series data and metadata from the waterml2 service
 info <- gdf(id = "3001", metadata = TRUE)
-plot(info$data, main=paste0("Daily flow data for the ",
-                            info$meta$station.name,
-                            " catchment (",
-                            info$meta$data.type.units, ")"),
+plot(info$data, 
+     main = paste0("Daily flow data for the ", info$meta$station.name,
+                   " catchment (",info$meta$data.type.units, ")"), 
      ylab = info$meta$data.type.name)
 ```
 
@@ -262,15 +262,14 @@ s <- cmr(c(3002,3003), metadata = TRUE)
 # s is a list of 2 objects (one object for each site)
 plot(s[[1]]$data, 
      main = paste(s[[1]]$meta$station.name, "and", s[[2]]$meta$station.name), 
-     sub = "Catchment monthly rainfall", ylab=s[[1]]$meta$data.type.units)
-lines(s[[2]]$data, col="green")
+     sub = "Catchment monthly rainfall", ylab = s[[1]]$meta$data.type.units)
+lines(s[[2]]$data, col = "green")
 
-s <- get_ts(c(3002,3003), type = "gdf",metadata = TRUE)
+s <- get_ts(c(3002, 3003), type = "gdf", metadata = TRUE)
 plot(s[[1]]$data, 
      main = paste(s[[1]]$meta$station.name, "and", s[[2]]$meta$station.name), 
      sub = "Gauged daily flow", ylab=s[[1]]$meta$data.type.units)
 lines(s[[2]]$data, col="pink2")
-
 ```
 
 ## Interoperability
@@ -279,7 +278,7 @@ Upgrade your data.frame to a data.table:
 
 ```{r}
 library(DT)
-datatable(catalogue(column_name="river", column_value="Thames",all = FALSE))
+datatable(catalogue(column_name = "river", column_value = "Thames", all = FALSE))
 ```
 
 Create interactive maps using leaflet:
@@ -325,7 +324,7 @@ library(ggplot2)
 ggplot(allStations[!is.na(allStations$qmed),], 
        aes(x = as.numeric(`catchment-area`), y = qmed)) +
   geom_point() +
-  stat_smooth(formula = y ~ x,method = "lm", col = "red") +
-  xlab(expression(paste("Catchment area [Km^2]",sep=""))) +
-  ylab(expression(paste("Mean flow [m^3/s]",sep="")))
+  stat_smooth(formula = y ~ x, method = "lm", col = "red") +
+  xlab(expression(paste("Catchment area [Km^2]", sep=""))) +
+  ylab(expression(paste("Mean flow [m^3/s]", sep="")))
 ```

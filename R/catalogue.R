@@ -66,7 +66,7 @@ catalogue <- function(bbox = NULL, column_name = NULL, column_value = NULL,
     lat_max <- bbox$lat_max
 
     df <- df[(df$latitude > lat_min & df$latitude < lat_max) &
-      (df$longitude > lon_min & df$longitude < lon_max), ]
+               (df$longitude > lon_min & df$longitude < lon_max), ]
   }
 
   ### FILTER BASED ON MINIMUM RECONDING YEARS ###
@@ -87,7 +87,7 @@ catalogue <- function(bbox = NULL, column_name = NULL, column_value = NULL,
   if (!is.null(column_name) && is.null(column_value)) {
     stop("Enter valid column_value")
   }
-  column_value <- gsub(" ", "",column_value) # code assumes no white spaces 
+  column_value <- gsub(" ", "", column_value) # code assumes no white spaces
   if (!is.null(column_name) && !is.null(column_value)) {
     my_column <- unlist(eval(parse(text = paste0("df$`", column_name, "`"))))
     # The column contains numbers
@@ -106,7 +106,7 @@ catalogue <- function(bbox = NULL, column_name = NULL, column_value = NULL,
                              substr(column_value, 3, nchar(column_value)))
           my_expression <- eval(parse(text = combined))
           newstation_list <- subset(df, my_expression)
-        }else{
+        }else {
           threshold <- as.numeric(as.character(substr(column_value, 2,
                                                       nchar(column_value))))
           combined_string <- paste("my_column",
@@ -116,12 +116,12 @@ catalogue <- function(bbox = NULL, column_name = NULL, column_value = NULL,
           my_expression <- eval(parse(text = combined_string))
           newstation_list <- subset(df, my_expression)
         }
-      }else{
+      }else {
         # Single value to match
         my_expression <- my_column == column_value
         newstation_list <- subset(df, my_expression)
       }
-    }else{
+    }else {
       # The column contains characters
       my_expression <- my_column == column_value
       newstation_list <- subset(df, my_expression)
