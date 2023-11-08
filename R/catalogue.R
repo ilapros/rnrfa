@@ -13,7 +13,7 @@
 #' @param min_rec minimum number of recording years
 #' @param all if TRUE it returns all the available metadata. If FALSE, it
 #' returns only the following columns: id, name, river, hydrometricArea,
-#' operator, haName, catchmentArea, altitude, lat, lon.
+#' catchmentArea, lat, lon, selected feh catchment descriptors.
 #'
 #' @details coordinates of bounding box are required in WGS84 (EPSG: 4326).
 #' If BB coordinates are missing, the function returns the list corresponding to
@@ -49,7 +49,7 @@ catalogue <- function(bbox = NULL, column_name = NULL, column_value = NULL,
   latitude <- longitude <- NULL
 
   parameters <- list(format = "json-object", station = "*", fields = "all")
-  station_info <- nrfa_api(webservice = "station-info", parameters)
+  station_info <- rnrfa:::nrfa_api(webservice = "station-info", parameters)
   # the station_info object is made of 3 elements:
   # 1. content (data), this is a list of one object called 'data'
   station_info_content <- station_info$content
@@ -87,6 +87,7 @@ catalogue <- function(bbox = NULL, column_name = NULL, column_value = NULL,
   if (!is.null(column_name) && is.null(column_value)) {
     stop("Enter valid column_value")
   }
+  column_value <- gsub(" ", "",column_value) # code assumes no white spaces 
   if (!is.null(column_name) && !is.null(column_value)) {
     my_column <- unlist(eval(parse(text = paste0("df$`", column_name, "`"))))
     # The column contains numbers
@@ -128,7 +129,9 @@ catalogue <- function(bbox = NULL, column_name = NULL, column_value = NULL,
     df <- newstation_list
   }
 
+  if(!all) df <- df[,c("id","name","river","hydrometric-area","catchment-area",
+                       "latitude","longitude","propwet","bfihost","farl","dpsbar",
+                       "saar-1961-1990","altbar","urbext-2000","qmed")]
   # Convert data frame to tibble
   return(tibble::as_tibble(df))
-
 }

@@ -4,7 +4,7 @@
 \alias{plot_trend}
 \title{Plot trend}
 \usage{
-plot_trend(df, column_name, maptype = "toner-lite", showmap = TRUE)
+plot_trend(df, column_name, maptype = "stamen_toner_lite", showmap = TRUE)
 }
 \arguments{
 \item{df}{Data frame containing at least 4 column:
@@ -13,19 +13,27 @@ lat (latitude), lon (longitude), slope and an additional user-defined column
 
 \item{column_name}{name of the column to use for grouping the results.}
 
-\item{maptype}{maptype. The default is "toner-lite", see ?ggmap::get_stamenmap for other options}
-
 \item{showmap}{set to FALSE to avoid plotting the map when running the function}
+
+\item{maptype:}{maptype, was need to choose the stamenmap type, now useless since
+stamenmap are no longer reachable}
 }
 \value{
 Two plots, the first showing the distribution of the
 trend over a map, based on the slope of the linear model that describes the
 trend. The second plot shows a boxplot of the slope grouped based on the
 column \code{column_name} and slope can be user-defined 
-(notice that in the plot the very extreme slope values are not displayed to avoid skewed visualisations).
+(notice that in the plot the very extreme slope values are not 
+displayed to avoid skewed visualisations).
 }
 \description{
 This function plots a previously calculated trend.
+}
+\details{
+The function relies on the `ggmap` package for the map, and this package has 
+in time gone through many changes due to changes in API of map providers. 
+Currently to be able to create the map one needs to register to the stadiamaps
+serice. More information at ?ggmap::register_stadiamaps().
 }
 \examples{
 \dontrun{

@@ -1,6 +1,6 @@
 Package: rnrfa
 Title: UK National River Flow Archive Data from R
-Version: 2.1.0
+Version: 2.1.0.5
 Authors@R: c(person("Ilaria", "Prosdocimi", 
                     email = "prosdocimi.ilaria@gmail.com",
                     role = c("ctb", "cre"),
@@ -57,5 +57,5 @@ Suggests:
 Encoding: UTF-8
 License: GPL-3
 Repository: CRAN
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rnrfa</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.0.5</span>
       </span>
     </div>
 
@@ -66,7 +66,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_trend</span><span class="op">(</span><span class="va">df</span>, <span class="va">column_name</span>, maptype <span class="op">=</span> <span class="st">"toner-lite"</span>, showmap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_trend</span><span class="op">(</span><span class="va">df</span>, <span class="va">column_name</span>, maptype <span class="op">=</span> <span class="st">"stamen_toner_lite"</span>, showmap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -81,12 +81,13 @@ lat (latitude), lon (longitude), slope and an additional user-defined column
 <dd><p>name of the column to use for grouping the results.</p></dd>
 
 
-<dt>maptype</dt>
-<dd><p>maptype. The default is "toner-lite", see ?ggmap::get_stamenmap for other options</p></dd>
-
-
 <dt>showmap</dt>
 <dd><p>set to FALSE to avoid plotting the map when running the function</p></dd>
+
+
+<dt>maptype:</dt>
+<dd><p>maptype, was need to choose the stamenmap type, now useless since
+stamenmap are no longer reachable</p></dd>
 
 </dl></div>
     <div id="value">
@@ -97,7 +98,15 @@ lat (latitude), lon (longitude), slope and an additional user-defined column
 trend over a map, based on the slope of the linear model that describes the
 trend. The second plot shows a boxplot of the slope grouped based on the
 column <code>column_name</code> and slope can be user-defined 
-(notice that in the plot the very extreme slope values are not displayed to avoid skewed visualisations).</p>
+(notice that in the plot the very extreme slope values are not 
+displayed to avoid skewed visualisations).</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>The function relies on the `ggmap` package for the map, and this package has 
+in time gone through many changes due to changes in API of map providers. 
+Currently to be able to create the map one needs to register to the stadiamaps
+serice. More information at ?ggmap::register_stadiamaps().</p>
     </div>
 
     <div id="ref-examples">
@@ -127,7 +136,7 @@ column <code>column_name</code> and slope can be user-defined
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -1,3 +1,24 @@
+2.1.0.5 intermediate github version 
+--------------------------------------
+date: 2023/11/08
+
+Medium changes: 
+
+- plot_trend updated to reflect changes in the ggmap package due to the stamen maps no longer being directly available
+
+Minor changes: 
+
+- catalogue() now allows for not all information to be retrieved (bug fix)
+- changes in the vignette text, mostly allowing the output to appear and updated the dependencies
+
+v2.1.0 and submitted to CRAN
+--------------------------------------
+Minor changes: 
+
+- Changes in test. some changes must have occurred in the NRFA dataset 
+- Bumped version - should have done this the previous time
+
+
 v2.0.6 and submitted to CRAN
 --------------------------------------
 Major changes: 

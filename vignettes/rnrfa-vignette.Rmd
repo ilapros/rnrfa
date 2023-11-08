@@ -1,6 +1,6 @@
 ---
 title: "An introduction to the rnrfa package"
-author: "Claudia Vitolo"
+author: "Claudia Vitolo and Ilaria Prosdocimi"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: references.bib
@@ -11,7 +11,7 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 ```
 
 ## Introduction
@@ -21,20 +21,22 @@ There is currently an API under development that in future should provide access
 
 The information returned by the first three services is in JSON format, while the last one is an XML variant.
 
-The RNRFA package aims to achieve a simpler and more efficient access to data by providing wrapper functions to send HTTP requests and interpret XML/JSON responses.
+The `rnrfa` package aims to achieve a simpler and more efficient access to data by providing wrapper functions to send HTTP requests and interpret XML/JSON responses.
 
 ### Dependencies
 The rnrfa package depends on the **gdal** library, make sure you have it installed on your system before attempting to install this package.
 
 **R package dependencies** can be installed running the following code:
 
-```{r}
-install.packages(c("cowplot", "httr", "xts", "ggmap", "ggplot2", "sp", "rgdal", "parallel", "tibble"))
+```{r,eval=FALSE}
+# these should normally already be installed with rnrfa
+install.packages(c("curl", "ggmap", "ggplot2", "httr", "jsonlite",
+                    "lubridate", "parallel", "sf","tibble", "zoo"))
 ```
 
 This demo makes also use of external libraries. To install and load them run the following commands:
 
-```{r}
+```{r,eval=FALSE}
 packs <- c("devtools", "DT", "leaflet")
 install.packages(packs)
 lapply(packs, require, character.only = TRUE)
@@ -44,26 +46,32 @@ lapply(packs, require, character.only = TRUE)
 
 The stable version of the **rnrfa** package is available from CRAN:
 
-```{r}
+```{r,eval=FALSE,message=FALSE}
 install.packages("rnrfa")
 ```
 
 Or you can install the development version from Github with [devtools](https://github.com/r-lib/devtools):
 
-```{r}
+```{r,eval=FALSE}
 devtools::install_github("ilapros/rnrfa")
 ```
 
 Now, load the rnrfa package:
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 library(rnrfa)
 ```
+
+```{r,eval=TRUE,echo=FALSE}
+suppressPackageStartupMessages(library(rnrfa))
+```
+
 
 ## Functions
 
 ### List of station identification numbers
-The function stations_info() returns a vector of all NRFA station identifiers. 
+
+The function `station_ids()` returns a vector of all NRFA station identifiers. 
 
 ```{r}
 # Retrieve station identifiers:
@@ -131,41 +139,46 @@ The same function catalogue() can be used to filter stations based on a bounding
 # Define a bounding box:
 bbox <- list(lon_min = -3.82, lon_max = -3.63, lat_min = 52.43, lat_max = 52.52)
 # Filter stations based on bounding box
-catalogue(bbox)
-```
+x <- catalogue(bbox)
+dim(x); range(x$latitude); range(x$longitude)
 
-```{r}
 # Filter based on minimum recording years
-catalogue(min_rec = 100)
+x <- catalogue(min_rec = 100)
+dim(x); range(lubridate::year(x$`gdf-end-date`) - lubridate::year(x$`gdf-start-date`))
 
-# Filter stations belonging to a certain hydrometric area
-catalogue(column_name="river", column_value="Wye")
+# Filter stations measuring a certain river
+x <- catalogue(column_name="river", column_value="Wye")
+dim(x); unique(x$river)
 
 # Filter based on bounding box & metadata strings
-catalogue(bbox, column_name="river", column_value="Wye")
+x <- catalogue(bbox, column_name="river", column_value="Wye")
+dim(x); unique(x$river)
 
 # Filter stations based on threshold
-catalogue(bbox, column_name="catchment-area", column_value=">1")
+x <- catalogue(bbox, column_name="catchment-area", column_value=">1")
+dim(x); range(x$`catchment-area`)
 
 # Filter based on minimum recording years
-catalogue(bbox, column_name = "catchment-area",
+x <- catalogue(bbox, column_name = "catchment-area",
           column_value = ">1",
           min_rec = 30)
-                                  
+dim(x)
+
 # Filter stations based on identification number
-catalogue(column_name="id", column_value=c(3001,3002,3003))
+x <- catalogue(column_name="id", column_value="== c(3001,3002,3003)")
+x$id
 ```
 
 ```{r}
 # Other combined filtering
 someStations <- catalogue(bbox,
                           column_name = "id",
-                          column_value = c(54022,54090,54091,54092,54097),
+                          column_value = "==c(54022,54090,54091,54092,54097)",
                           min_rec = 35)
 ```
 
 ### Conversions
-The RNRFA package allows convenient conversion between UK grid reference and more standard coordinate systems. The function "osg_parse()", for example, converts the string to easting and northing in the BNG coordinate system (EPSG code: 27700), as in the example below:
+The `rnrfa` package allows convenient conversion between UK grid reference and more standard coordinate systems. The function `osg_parse()`, for example, converts the string to easting and northing in the BNG coordinate system (EPSG code: 27700), as in the example below:
 
 ```{r}
 # Where is the first catchment located?
@@ -182,7 +195,7 @@ The same function can also convert from BNG to latitude and longitude in the WSG
 osg_parse(grid_refs = "SN853872", coord_system = "WGS84")
 ```
 
-osg_parse() also works with multiple references:
+`osg_parse()` also works with multiple references:
 
 ```{r}
 osg_parse(grid_refs = someStations$`grid-reference`$ngr)
@@ -190,11 +203,11 @@ osg_parse(grid_refs = someStations$`grid-reference`$ngr)
 
 ### Get time series data
 
-The first column of the table "someStations" contains the id number. This can be used to retrieve time series data and convert waterml2 files to time series object (of class zoo). 
+The first column of the table `someStations` contains the id number. This can be used to retrieve time series data and convert waterml2 files to time series object (of class zoo). 
 
-The National River Flow Archive serves two types of time series data: gauged daily flow and catchment mean rainfall.
+The National River Flow Archive mainly serves two types of time series data: gauged daily flow and catchment mean rainfall.
 
-These time series can be obtained using the functions gdf() and cmr(), respectively. Both functions accept three inputs: 
+These time series can be obtained using the functions `gdf()` and `cmr()`, respectively. Both functions accept three inputs: 
 
   * `id`, the station identification numbers (single string or character vector).
 
@@ -202,37 +215,45 @@ These time series can be obtained using the functions gdf() and cmr(), respectiv
 
   * `cl`, This is a cluster object, created by the parallel package. This is set to NULL by default, which sends sequential calls to the server.
 
+Other time series data are made available via the API and can be retrieved using `get_ts()` - for details on the time series which can be retrieved see `?get_ts()`. 
+
 Here is how to retrieve mean rainfall (monthly) data for _Shin at Lairg (id = 3001)_ catchment.
 
-```{r, fig.width=7}
+```{r, fig.width=7,fig.asp=0.6}
 # Fetch only time series data from the waterml2 service
 info <- cmr(id = "3001")
 plot(info)
+```
 
+One can also ask to retrieve some metadata with useful information: 
+
+```{r, fig.width=7,fig.asp=0.6}
 # Fetch time series data and metadata from the waterml2 service
 info <- cmr(id = "3001", metadata = TRUE)
+info$meta
 plot(info$data, main=paste("Monthly rainfall data for the",
-                           info$meta$stationName,"catchment"), 
-     xlab="", ylab=info$meta$units)
+                           info$meta$station.name,"catchment"), 
+     xlab="", ylab=info$meta$data.type.units)
 ```
 
 Here is how to retrieve (daily) flow data for _Shin at Lairg (id = 3001)_ catchment.
 
-```{r, fig.width=7}
+```{r, fig.width=7,fig.asp=0.6}
 # Fetch only time series data
-info <- gdf(id = "3001")
-plot(info)
+# info <- gdf(id = "3001")
+# plot(info)
 
 # Fetch time series data and metadata from the waterml2 service
 info <- gdf(id = "3001", metadata = TRUE)
 plot(info$data, main=paste0("Daily flow data for the ",
                             info$meta$station.name,
                             " catchment (",
-                            info$meta$data.type.units, ")"))
+                            info$meta$data.type.units, ")"),
+     ylab = info$meta$data.type.name)
 ```
 
 ### Multiple sites
-By default, the functions `getTS()` can be used to fetch time series data from multiple site in a sequential mode (using 1 core):
+By default, the functions `gdf` and `cmr` functions can be used to fetch time series data from multiple site in a sequential mode (using 1 core):
 
 ```{r, fig.width=7}
 # Search data/metadata
@@ -240,8 +261,16 @@ s <- cmr(c(3002,3003), metadata = TRUE)
 
 # s is a list of 2 objects (one object for each site)
 plot(s[[1]]$data, 
-     main = paste(s[[1]]$meta$station.name, "and", s[[2]]$meta$station.name))
+     main = paste(s[[1]]$meta$station.name, "and", s[[2]]$meta$station.name), 
+     sub = "Catchment monthly rainfall", ylab=s[[1]]$meta$data.type.units)
 lines(s[[2]]$data, col="green")
+
+s <- get_ts(c(3002,3003), type = "gdf",metadata = TRUE)
+plot(s[[1]]$data, 
+     main = paste(s[[1]]$meta$station.name, "and", s[[2]]$meta$station.name), 
+     sub = "Gauged daily flow", ylab=s[[1]]$meta$data.type.units)
+lines(s[[2]]$data, col="pink2")
+
 ```
 
 ## Interoperability
@@ -250,7 +279,7 @@ Upgrade your data.frame to a data.table:
 
 ```{r}
 library(DT)
-datatable(catalogue())
+datatable(catalogue(column_name="river", column_value="Thames",all = FALSE))
 ```
 
 Create interactive maps using leaflet:
@@ -297,7 +326,7 @@ someStations$meangdf <- unlist(lapply(s2, mean))
 library(ggplot2)
 ggplot(someStations, aes(x = as.numeric(`catchment-area`), y = meangdf)) +
   geom_point() +
-  stat_smooth(method = "lm", col = "red") +
+  stat_smooth(formula = y ~ x,method = "lm", col = "red") +
   xlab(expression(paste("Catchment area [Km^2]",sep=""))) +
   ylab(expression(paste("Mean flow [m^3/s]",sep="")))
 ```

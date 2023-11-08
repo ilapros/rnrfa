@@ -6,14 +6,23 @@
 #' lat (latitude), lon (longitude), slope and an additional user-defined column
 #' \code{column_name}.
 #' @param column_name name of the column to use for grouping the results.
-#' @param maptype maptype. The default is "toner-lite", see ?ggmap::get_stamenmap for other options 
+#' @param maptype: maptype, was need to choose the stamenmap type, now useless since
+#' stamenmap are no longer reachable 
 #' @param showmap set to FALSE to avoid plotting the map when running the function
 #'
 #' @return Two plots, the first showing the distribution of the
 #' trend over a map, based on the slope of the linear model that describes the
 #' trend. The second plot shows a boxplot of the slope grouped based on the
 #' column \code{column_name} and slope can be user-defined 
-#' (notice that in the plot the very extreme slope values are not displayed to avoid skewed visualisations). 
+#' (notice that in the plot the very extreme slope values are not 
+#' displayed to avoid skewed visualisations). 
+#' 
+#' @details
+#' The function relies on the `ggmap` package for the map, and this package has 
+#' in time gone through many changes due to changes in API of map providers. 
+#' Currently to be able to create the map one needs to register to the stadiamaps
+#' serice. More information at ?ggmap::register_stadiamaps(). 
+#'  
 #'
 #' @export
 #'
@@ -30,7 +39,7 @@
 #'   
 #' }
 
-plot_trend <- function(df, column_name, maptype = "toner-lite", showmap = TRUE) {
+plot_trend <- function(df, column_name, maptype = "stamen_toner_lite", showmap = TRUE) {
   names(df) <- tolower(names(df))
   if(!all(c("lat", "lon") %in% names(df))){
     if(all(c("latitude", "longitude") %in% names(df))) {
@@ -41,20 +50,22 @@ plot_trend <- function(df, column_name, maptype = "toner-lite", showmap = TRUE) 
   df$trend <- NA
   df$trend[df$slope >= 0]  <- "Positive"
   df$trend[df$slope < 0]  <- "Negative"
-
+  
+  plot1 <- NULL 
   # To avoid Note in R check
   lon <- lat <- trend <- slope <- NULL
 
-  # Plot red dot for decreasing trend, blue dot for increasing trend
-  tolerance <- (max(df$lon, na.rm = TRUE) - min(df$lon, na.rm = TRUE)) / 10
-  # m <- ggmap::get_map(location = c(min(df$lon, na.rm = TRUE) - 2 * tolerance,
-  #                           min(df$lat, na.rm = TRUE) - 2 * tolerance,
-  #                           max(df$lon, na.rm = TRUE) + tolerance,
-  #                           max(df$lat, na.rm = TRUE)) + tolerance,
-  #              maptype = "toner-lite")
-  ## ggmap only work with stamen, updating so one can choose maptype 
-  
-  ## from ggmap 
+  if(showmap){ ## only create plot1 if map is required 
+   
+    # Plot red dot for decreasing trend, blue dot for increasing trend
+    tolerance <- (max(df$lon, na.rm = TRUE) - min(df$lon, na.rm = TRUE)) / 10
+    # m <- ggmap::get_map(location = c(min(df$lon, na.rm = TRUE) - 2 * tolerance,
+    #                           min(df$lat, na.rm = TRUE) - 2 * tolerance,
+    #                           max(df$lon, na.rm = TRUE) + tolerance,
+    #                           max(df$lat, na.rm = TRUE)) + tolerance,
+    #              maptype = "toner-lite")
+ 
+    ## form ggmap 
     location <- c(left = min(df$lon, na.rm = TRUE) - 2 * tolerance,
                     bottom = min(df$lat, na.rm = TRUE) - 2 * tolerance,
                     right= max(df$lon, na.rm = TRUE) + tolerance,
@@ -62,14 +73,14 @@ plot_trend <- function(df, column_name, maptype = "toner-lite", showmap = TRUE) 
     lon_range <- location[c("left","right")]
     lat_range <- location[c("bottom","top")]
 
-      # compute zoom
+    # compute zoom
     lonlength <- diff(lon_range)
     latlength <- diff(lat_range)
     zoomlon <- ceiling( log2( 360*2 / lonlength) )
     zoomlat <- ceiling( log2( 180*2 / latlength) )
     zoom <- max(zoomlon, zoomlat)
   
-  m <- ggmap::get_stamenmap(bbox = location,
+  m <- ggmap::get_stadiamap(bbox = location,
                maptype = maptype, zoom = zoom)
 
   # Plot map
@@ -81,7 +92,7 @@ plot_trend <- function(df, column_name, maptype = "toner-lite", showmap = TRUE) 
                                            "Positive" = "dodgerblue2")) +
     ggplot2::theme(legend.position = "top") +
     ggplot2::ggtitle("A")
-
+  }
   # Boxplot by grouping variable (e.g. NUTS1 region)
   plot2 <- ggplot2::ggplot(df,
                            ggplot2::aes(x = eval(parse(text = column_name)),
@@ -100,7 +111,7 @@ plot_trend <- function(df, column_name, maptype = "toner-lite", showmap = TRUE) 
                                                                           0,
                                                                           0))) +
     ggplot2::ggtitle("B")
-  if(showmap) print(plot1) 
+  # if(showmap) print(plot1) 
   return(list("A" = plot1, "B" = plot2))
 
 }
