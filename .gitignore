@@ -12,6 +12,7 @@
 *.Rproj
 *.pdf
 *.svx
+*.bak
 rnrfa.Rcheck
 README.html
 README_cache/*

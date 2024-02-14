@@ -66,9 +66,9 @@ plot_trend <- function(df, column_name, maptype = "stamen_toner_lite", showmap =
     #              maptype = "toner-lite")
  
     ## form ggmap 
-    location <- c(left = min(df$lon, na.rm = TRUE) - 2 * tolerance,
-                    bottom = min(df$lat, na.rm = TRUE) - 2 * tolerance,
-                    right= max(df$lon, na.rm = TRUE) + tolerance,
+    location <- c(left = min(df$lon, na.rm = TRUE) - 2 * tolerance, 
+                    bottom = min(df$lat, na.rm = TRUE) - 2 * tolerance, 
+                    right= max(df$lon, na.rm = TRUE) + tolerance, 
                     top = max(df$lat, na.rm = TRUE)) + tolerance
     lon_range <- location[c("left","right")]
     lat_range <- location[c("bottom","top")]
@@ -76,8 +76,8 @@ plot_trend <- function(df, column_name, maptype = "stamen_toner_lite", showmap =
     # compute zoom
     lonlength <- diff(lon_range)
     latlength <- diff(lat_range)
-    zoomlon <- ceiling( log2( 360*2 / lonlength) )
-    zoomlat <- ceiling( log2( 180*2 / latlength) )
+    zoomlon <- ceiling(log2(360*2/lonlength))
+    zoomlat <- ceiling(log2(180*2/latlength))
     zoom <- max(zoomlon, zoomlat)
   
   m <- ggmap::get_stadiamap(bbox = location,

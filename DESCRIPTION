@@ -48,7 +48,8 @@ Suggests:
     DT,
     leaflet, 
     devtools,
-    dygraphs
+    dygraphs, 
+    V8
 Encoding: UTF-8
 License: GPL-3
 Repository: CRAN

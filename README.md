@@ -116,5 +116,5 @@ This package uses a non-public API which is likely to change. Package and functi
 ### Meta
 
 -   Please [report any issues or bugs](https://github.com/ilapros/rnrfa/issues).
--   License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
+-   License: [GPL-3](https://opensource.org/license/gpl-3-0/)
 -   Get citation information for `rnrfa` in R doing `citation(package = 'rnrfa')`
