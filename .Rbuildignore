@@ -10,5 +10,5 @@ README.Rmd
 ^doc$
 ^pkgdown$
 cran-comments.md
-lastMiKTeXException
-NULL 
+^dev$
+^revdep$

@@ -33,7 +33,7 @@ This function plots a previously calculated trend.
 The function relies on the `ggmap` package for the map, and this package has 
 in time gone through many changes due to changes in API of map providers. 
 Currently to be able to create the map one needs to register to the stadiamaps
-serice. More information at ?ggmap::register_stadiamaps().
+service. More information at ?ggmap::register_stadiamaps().
 }
 \examples{
 \dontrun{

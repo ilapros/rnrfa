@@ -58,6 +58,13 @@ nrfa_api <- function(webservice, parameters, path = "") {
     class = "nrfa_api")
 }
 
+
+#' print.nrfa_api
+#' @export print.nrfa_api
+#' @param x an nrfa call 
+#' @param ... additional items, not really used 
+#' 
+#' @description Not to be used by user. Internal function used to print error in nrfaapi.
 print.nrfa_api <- function(x, ...) {
   cat("<NRFA ", x$path, ">\n", sep = "")
   str(x$content)

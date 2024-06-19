@@ -3,11 +3,11 @@ title: "An introduction to the rnrfa package"
 author: "Claudia Vitolo and Ilaria Prosdocimi"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
-bibliography: references.bib
 vignette: >
   %\VignetteIndexEntry{An introduction to the rnrfa package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{DT,leaflet,dygraphs,ggplot2}
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +15,8 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 ```
 
 ## Introduction
-The UK National River Flow Archive serves daily streamflow data, spatial rainfall averages and information regarding elevation, geology, land cover and FEH related catchment descriptors.
+
+The [UK National River Flow Archive](https://nrfa.ceh.ac.uk/) serves daily streamflow data, spatial rainfall averages and information regarding elevation, geology, land cover and FEH related catchment descriptors.
 
 There is currently an API under development that in future should provide access to the following services: metadata catalogue, catalogue filters based on a geographical bounding-box, catalogue filters based on metadata entries, gauged daily data for about 400 stations available in WaterML2 format, the OGC standard used to describe hydrological time series.  
 
@@ -24,7 +25,6 @@ The information returned by the first three services is in JSON format, while th
 The `rnrfa` package aims to achieve a simpler and more efficient access to data by providing wrapper functions to send HTTP requests and interpret XML/JSON responses.
 
 ### Dependencies
-The rnrfa package depends on the **gdal** library, make sure you have it installed on your system before attempting to install this package.
 
 **R package dependencies** can be installed running the following code:
 
@@ -36,7 +36,7 @@ install.packages(c("curl", "ggmap", "ggplot2", "httr", "jsonlite",
 
 This demo makes also use of external libraries. To install and load them run the following commands:
 
-```{r,eval=TRUE}
+```{r,eval=FALSE}
 packs <- c("devtools", "DT", "leaflet", "dygraphs")
 install.packages(packs, repos = "https://cloud.r-project.org")
 lapply(packs, require, character.only = TRUE)
@@ -50,10 +50,10 @@ The stable version of the **rnrfa** package is available from CRAN:
 install.packages("rnrfa")
 ```
 
-Or you can install the development version from Github with [devtools](https://github.com/r-lib/devtools):
+Or you can install the development version from Github with [remotes](https://remotes.r-lib.org/):
 
 ```{r,eval=FALSE}
-devtools::install_github("ilapros/rnrfa")
+remotes::install_github("ilapros/rnrfa")
 ```
 
 Now, load the rnrfa package:
@@ -80,7 +80,7 @@ head(allIDs)
 ```
 
 ### List of monitoring stations
-The function catalogue() retrieves information for monitoring stations. The function, used with no inputs, requests the full list of gauging stations with associated metadata. The output is a tibble containing one record for each station and as many columns as the number of metadata entries available. 
+The function `catalogue()` retrieves information for monitoring stations. The function, used with no inputs, requests the full list of gauging stations with associated metadata. The output is a tibble containing one record for each station and as many columns as the number of metadata entries available. 
 
 ```{r}
 # Retrieve information for all the stations in the catalogue:
@@ -133,7 +133,8 @@ spatial-location
 * The grid reference and lat/long as individual fields: easting, northing, latitude, longitude.
 
 ### Station filtering
-The same function catalogue() can be used to filter stations based on a bounding box or any of the metadata entries. 
+
+The same function `catalogue()` can be used to filter stations based on a bounding box or any of the metadata entries. 
 
 ```{r}
 # Define a bounding box:
@@ -178,6 +179,7 @@ someStations <- catalogue(bbox,
 ```
 
 ### Conversions
+
 The `rnrfa` package allows convenient conversion between UK grid reference and more standard coordinate systems. The function `osg_parse()`, for example, converts the string to easting and northing in the BNG coordinate system (EPSG code: 27700), as in the example below:
 
 ```{r}
@@ -215,7 +217,7 @@ These time series can be obtained using the functions `gdf()` and `cmr()`, respe
 
   * `cl`, This is a cluster object, created by the parallel package. This is set to NULL by default, which sends sequential calls to the server.
 
-Other time series data are made available via the API and can be retrieved using `get_ts()` - for details on the time series which can be retrieved see `?get_ts()`. 
+Other time series data are made available via the API and can be retrieved using `get_ts()` - for details on the time series which can be retrieved see `?get_ts`. 
 
 Here is how to retrieve mean rainfall (monthly) data for _Shin at Lairg (id = 3001)_ catchment.
 
@@ -253,7 +255,8 @@ plot(info$data,
 ```
 
 ### Multiple sites
-By default, the functions `gdf` and `cmr` functions can be used to fetch time series data from multiple site in a sequential mode (using 1 core):
+
+By default, the functions `gdf()` and `cmr()` functions can be used to fetch time series data from multiple site in a sequential mode (using 1 core):
 
 ```{r, fig.width=7}
 # Search data/metadata

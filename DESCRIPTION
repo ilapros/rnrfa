@@ -1,57 +1,58 @@
 Package: rnrfa
 Title: UK National River Flow Archive Data from R
-Version: 2.1.0.5
-Authors@R: c(person("Ilaria", "Prosdocimi", 
-                    email = "prosdocimi.ilaria@gmail.com",
-                    role = c("ctb", "cre"),
-                    comment = c(ORCID = "0000-0001-8565-094X")),
-             person("Claudia", "Vitolo",
-                    comment = c(ORCID = "0000-0002-4252-1176",
-                    "Claudia is the original creator of the package"), 
-                    role = c("aut")),
-             person("Matthew", "Fry", role = c("ctb"),
-                    comment = "Matthew supervised the unofficial API 
-                    integration."),
-             person("Wouter", "Buytaert", role = c("ctb"),
-                    comment = "This package is part of Claudia Vitolo's PhD work
-                    and Wouter is the supervisor."),
-             person("Michael", "Spencer", role = c("ctb"),
-                    comment = "Michael updated the function osg_parse to work 
-                    with grid references of different lengths."),
-             person("Tobias", "Gauster", role = c("ctb"),
-                    comment = "Tobias improved the function osg_parse 
-                    introducing vectorisation")
-                    )
+Version: 2.1.0.6
+Authors@R: c(
+    person("Ilaria", "Prosdocimi", , "prosdocimi.ilaria@gmail.com", role = c("ctb", "cre"),
+           comment = c(ORCID = "0000-0001-8565-094X")),
+    person("Claudia", "Vitolo", role = "aut",
+           comment = c(ORCID = "0000-0002-4252-1176", "Claudia is the original creator of the package")),
+    person("Matthew", "Fry", role = "ctb",
+           comment = "Matthew supervised the unofficial API \n                    integration."),
+    person("Wouter", "Buytaert", role = "ctb",
+           comment = "This package is part of Claudia Vitolo's PhD work\n                    and Wouter is the supervisor."),
+    person("Michael", "Spencer", role = "ctb",
+           comment = "Michael updated the function osg_parse to work \n                    with grid references of different lengths."),
+    person("Tobias", "Gauster", role = "ctb",
+           comment = "Tobias improved the function osg_parse \n                    introducing vectorisation")
+  )
+Description: Utility functions to retrieve data from the UK National River
+    Flow Archive (<https://nrfa.ceh.ac.uk/>, terms and conditions:
+    <https://nrfa.ceh.ac.uk/costs-terms-and-conditions>). The package
+    contains R wrappers to the UK NRFA data temporary-API. There are
+    functions to retrieve stations falling in a bounding box, to generate
+    a map and extracting time series and general information. The package
+    is fully described in Vitolo et al (2016) "rnrfa: An R package to
+    Retrieve, Filter and Visualize Data from the UK National River Flow
+    Archive"
+    <https://journal.r-project.org/archive/2016/RJ-2016-036/RJ-2016-036.pdf>.
+License: GPL-3
 URL: https://ilapros.github.io/rnrfa/
 BugReports: https://github.com/ilapros/rnrfa/issues
-Description: Utility functions to retrieve data from the UK National River Flow Archive (<https://nrfa.ceh.ac.uk/>, terms and conditions: <https://nrfa.ceh.ac.uk/costs-terms-and-conditions>). The package contains R wrappers to the UK NRFA data temporary-API. There are functions to retrieve stations falling in a bounding box, to generate a map and extracting time series and general information. The package is fully  described in Vitolo et al (2016) "rnrfa: An R package to Retrieve, Filter and Visualize Data from the UK National River Flow Archive" <https://journal.r-project.org/archive/2016/RJ-2016-036/RJ-2016-036.pdf>.
-Depends: R (>= 3.5)
+Depends: 
+    R (>= 3.5)
 Imports:
     curl,
-    jsonlite,
-    lubridate,
-    graphics,
-    stats,
-    httr,
-    zoo,
     ggmap (>= 4.0.0),
     ggplot2,
-    sf,
+    graphics,
+    httr,
+    jsonlite,
+    lubridate,
     parallel,
-    tibble
+    sf,
+    stats,
+    tibble,
+    utils,
+    zoo
 Suggests: 
-    testthat,
-    knitr,
-    covr,
-    lintr,
-    rmarkdown, 
     DT,
-    leaflet, 
-    devtools,
-    dygraphs, 
-    V8
+    dygraphs,
+    knitr,
+    leaflet,
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
-License: GPL-3
 Repository: CRAN
-RoxygenNote: 7.2.3
-VignetteBuilder: knitr
+RoxygenNote: 7.3.1

@@ -17,7 +17,6 @@
 #'   \item ndf = Naturalised daily flows
 #'   \item nmf = Naturalised monthly flows
 #'   \item cdr = Catchment daily rainfall
-#'   \item cdr-d = Catchment daily rainfall distance to rain gauge
 #'   \item cmr = Catchment monthly rainfall
 #'   \item pot-stage = Peaks over threshold stage
 #'   \item pot-flow = Peaks over threshold flow
@@ -55,8 +54,8 @@
 
 get_ts <- function(id, type, metadata = FALSE, cl = NULL, full_info = FALSE) {
 
-  options(warn = -1)                                     # do not print warnings
-
+  # options(warn = -1)                                     # do not print warnings
+  if(type == "cdr-d") message("cdr-d information will be retired soon - avoid using this")
   id <- as.character(id)         # in case it is a factor, convert to characters
 
   if (length(as.list(id)) == 0) {

@@ -11,13 +11,13 @@
 
 **This is the new page of rnrfa - past versions (and the first version) can be seen at https://github.com/cvitolo/rnrfa**
 
-The UK National River Flow Archive serves daily streamflow data, spatial rainfall averages and information regarding elevation, geology, land cover and FEH related catchment descriptors.
+The [UK National River Flow Archive](https://nrfa.ceh.ac.uk/) serves daily streamflow data, spatial rainfall averages and information regarding elevation, geology, land cover and FEH related catchment descriptors.
 
 There is currently an API under development that in future should provide access to the following services: metadata catalogue, catalogue filters based on a geographical bounding-box, catalogue filters based on metadata entries, gauged daily data for about 400 stations available in WaterML2 format, the OGC standard used to describe hydrological time series.
 
 The information returned by the first three services is in JSON format, while the last one is an XML variant.
 
-The RNRFA package aims to achieve a simpler and more efficient access to data by providing wrapper functions to send HTTP requests and interpret XML/JSON responses.
+The `rnrfa` package aims to achieve a simpler and more efficient access to data by providing wrapper functions to send HTTP requests and interpret XML/JSON responses.
 
 ## Installation
 
@@ -116,5 +116,5 @@ This package uses a non-public API which is likely to change. Package and functi
 ### Meta
 
 -   Please [report any issues or bugs](https://github.com/ilapros/rnrfa/issues).
--   License: [GPL-3](https://opensource.org/license/gpl-3-0/)
+-   License: [GPL-3](https://opensource.org/license/gpl-3-0)
 -   Get citation information for `rnrfa` in R doing `citation(package = 'rnrfa')`

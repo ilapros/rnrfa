@@ -17,7 +17,6 @@ range [3002,236051].}
   \item ndf = Naturalised daily flows
   \item nmf = Naturalised monthly flows
   \item cdr = Catchment daily rainfall
-  \item cdr-d = Catchment daily rainfall distance to rain gauge
   \item cmr = Catchment monthly rainfall
   \item pot-stage = Peaks over threshold stage
   \item pot-flow = Peaks over threshold flow

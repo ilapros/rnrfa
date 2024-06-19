@@ -1,7 +1,19 @@
+api_unavailable <- function(){
+  resp1 <- httr::GET(url = "https://nrfaapps.ceh.ac.uk/nrfa/ws/time-series", 
+                     query = list(format = "json-object", station = 39001,`data-type` = "gdf"), 
+                     httr::user_agent("https://github.com/ilapros/rnrfa"))
+  resp2 <- httr::GET(url = "https://nrfaapps.ceh.ac.uk/nrfa/ws/time-series", 
+                     query = list(format = "json-object", station = 39001,`data-type` = "cmr"), 
+                     httr::user_agent("https://github.com/ilapros/rnrfa"))
+  # if any of the two streams is not working skip tests 
+  (httr::http_error(resp1) | httr::http_error(resp2))
+}
+
+
 context("get_ts")
 
 test_that("Check get_ts fails (gracefully) when it should", {
-
+  skip_if(api_unavailable(), "API not available")
   rain <- get_ts(id = NULL, type = "cmr")
   expect_true(is.null(rain))
 
@@ -15,6 +27,7 @@ test_that("Check get_ts fails (gracefully) when it should", {
 
 test_that("get_ts cmr single works", {
 
+  skip_if(api_unavailable(), "API not available")
   rain <- get_ts(id = 18019, type = "cmr")
   expect_true(class(rain) == "zoo")
   expect_true(length(rain) >= 660)
@@ -23,6 +36,7 @@ test_that("get_ts cmr single works", {
 
 test_that("get_ts cmr multi works", {
 
+  skip_if(api_unavailable(), "API not available")
   rain <- get_ts(id = c(54022, 54090, 54091), type = "cmr")
   expect_true(class(rain) == "list")
   expect_true(class(rain[[1]]) == "zoo")
@@ -34,6 +48,7 @@ test_that("get_ts cmr multi works", {
 
 test_that("get_ts gdf single works", {
 
+  skip_if(api_unavailable(), "API not available")
   flow <- get_ts(id = 18019, type = "gdf")
   expect_true(class(flow) == "zoo")
   expect_equal(as.numeric(flow[1]), 0.056)
@@ -43,6 +58,7 @@ test_that("get_ts gdf single works", {
 
 test_that("get_ts gdf multi works", {
 
+  skip_if(api_unavailable(), "API not available")
   flow <- get_ts(id = c(54022, 54090, 54091), type = "gdf")
   expect_true(class(flow) == "list")
   expect_true(class(flow[[1]]) == "zoo")
@@ -57,6 +73,7 @@ test_that("get_ts gdf multi works", {
 
 test_that("Check get_ts works with other types", {
 
+  skip_if(api_unavailable(), "API not available")
   x1 <- get_ts(id = 43010, type = "amax-flow")
   expect_true(class(x1) == "zoo")
   x1 <- get_ts(id = 43010, type = "amax-flow", full_info = TRUE)

@@ -1,3 +1,7 @@
+# reminder of how to prepare a submisison and an update
+dev.R
+dev/*
+
 # History files
 .Rhistory
 
@@ -21,3 +25,4 @@ doc
 Meta
 /doc/
 /Meta/
+revdep/

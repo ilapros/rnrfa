@@ -1,3 +1,10 @@
+2.1.0.6
+--------------------------------------
+date: 2024/06/19
+
+small changes: 
+- changes in test functions: realized I needed them after the API broke for some days 
+
 2.1.0.5 intermediate github version 
 --------------------------------------
 date: 2023/11/08
