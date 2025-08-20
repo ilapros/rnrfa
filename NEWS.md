@@ -1,3 +1,11 @@
+2.1.0.7
+--------------------------------------
+date: 2025/08/20
+
+small changes: 
+- changes in test functions: some tests were failing due to some changes in NRFA outputs 
+
+
 2.1.0.6
 --------------------------------------
 date: 2024/06/19

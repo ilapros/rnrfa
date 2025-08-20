@@ -3,11 +3,12 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.593201.svg)](https://doi.org/10.5281/zenodo.593201)
 
+  <!-- badges: start -->
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/rnrfa)](https://cran.r-project.org/package=rnrfa)
 [![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rnrfa)](https://cran.r-project.org/package=rnrfa)
 [![CRAN Monthly Downloads](http://cranlogs.r-pkg.org/badges/rnrfa)](https://cran.r-project.org/package=rnrfa)
-[![R-CMD-check](https://github.com/ilapros/rnrfa/workflows/R-CMD-check/badge.svg)](https://github.com/ilapros/rnrfa/actions)
-[![Coverage Status](https://codecov.io/github/ilapros/rnrfa/graph/badge.svg)](https://app.codecov.io/github/ilapros/rnrfa?branch=master)
+[![R-CMD-check](https://github.com/ilapros/rnrfa/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ilapros/rnrfa/actions/workflows/R-CMD-check.yaml)
+  <!-- badges: end -->
 
 **This is the new page of rnrfa - past versions (and the first version) can be seen at https://github.com/cvitolo/rnrfa**
 
