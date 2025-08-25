@@ -12,3 +12,6 @@ README.Rmd
 cran-comments.md
 ^dev$
 ^revdep$
+inst/WORDLIST
+tests/spelling.R
+
