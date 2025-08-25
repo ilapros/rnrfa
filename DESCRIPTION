@@ -1,6 +1,6 @@
 Package: rnrfa
 Title: UK National River Flow Archive Data from R
-Version: 2.1.0.6
+Version: 2.1.0.7
 Authors@R: c(
     person("Ilaria", "Prosdocimi", , "prosdocimi.ilaria@gmail.com", role = c("ctb", "cre"),
            comment = c(ORCID = "0000-0001-8565-094X")),
@@ -17,7 +17,7 @@ Authors@R: c(
   )
 Description: Utility functions to retrieve data from the UK National River
     Flow Archive (<https://nrfa.ceh.ac.uk/>, terms and conditions:
-    <https://nrfa.ceh.ac.uk/costs-terms-and-conditions>). The package
+    <https://nrfa.ceh.ac.uk/help/costs-terms-and-conditions>). The package
     contains R wrappers to the UK NRFA data temporary-API. There are
     functions to retrieve stations falling in a bounding box, to generate
     a map and extracting time series and general information. The package
